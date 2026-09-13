@@ -1,0 +1,4785 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Veri-Byte | AI Face Verification</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fffaf5;
+            color: #2b1a12;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+
+            min-height: 100px;
+
+            padding: 15px 4%;
+
+            display: flex;
+            align-items: center;
+
+            gap: 30px;
+
+            color: white;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 1000;
+
+            background:
+                linear-gradient(
+                    rgba(82, 38, 14, 0.25),
+                    rgba(82, 38, 14, 0.25)
+                ),
+                repeating-linear-gradient(
+                    8deg,
+                    #713713 0px,
+                    #8f4a20 4px,
+                    #713713 8px,
+                    #a65b2b 13px
+                );
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.2);
+        }
+
+
+        /* =========================
+           BRAND
+        ========================= */
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .flag-image {
+
+            width: 72px;
+
+            height: 48px;
+
+            object-fit: cover;
+
+            border-radius: 2px;
+
+            box-shadow:
+                0 2px 7px rgba(0,0,0,0.25);
+        }
+
+
+        .brand-name {
+
+            font-family:
+                "Trebuchet MS",
+                Arial,
+                sans-serif;
+
+            font-size: 40px;
+
+            letter-spacing: -2px;
+        }
+
+
+        .brand-name span {
+
+            color: #ff9a2e;
+        }
+
+
+        .brand-subtitle {
+
+            font-size: 13px;
+
+            margin-top: 4px;
+
+            color: #9de0ba;
+        }
+
+
+        .brand-subtitle span {
+
+            color: #ffb52e;
+        }
+
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        nav {
+
+            margin-left: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+        }
+
+
+        nav a {
+
+            color: white;
+
+            font-size: 15px;
+
+            padding: 10px 0;
+
+            position: relative;
+
+            transition: 0.2s;
+        }
+
+
+        nav a:hover {
+
+            color: #ffc477;
+        }
+
+
+        nav a.active::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            height: 2px;
+
+            background: #ff8a16;
+        }
+
+
+        /* =========================
+           LOGIN HEADER BUTTON
+        ========================= */
+
+        .header-login {
+
+            margin-left: 15px;
+
+            padding: 12px 23px;
+
+            border: 1px solid #ff951f;
+
+            border-radius: 12px;
+
+            background:
+                rgba(40,15,5,0.35);
+
+            color: white;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .header-login:hover {
+
+            background: #ed7100;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            min-height: 570px;
+
+            padding: 70px 7%;
+
+            display: grid;
+
+            grid-template-columns:
+                1.2fr 0.8fr;
+
+            gap: 80px;
+
+            align-items: center;
+
+            background:
+
+                radial-gradient(
+                    circle at 20% 30%,
+                    rgba(255,160,70,0.13),
+                    transparent 30%
+                ),
+
+                #fffaf5;
+        }
+
+
+        /* =========================
+           BADGE
+        ========================= */
+
+        .badge {
+
+            display: inline-block;
+
+            padding: 9px 18px;
+
+            border: 1px solid #efd8c5;
+
+            border-radius: 30px;
+
+            background: white;
+
+            color: #60483a;
+
+            margin-bottom: 25px;
+
+            font-size: 14px;
+        }
+
+
+        .badge span {
+
+            color: #e87500;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           HERO TITLE
+        ========================= */
+
+        .hero h1 {
+
+            font-size: 68px;
+
+            line-height: 1.05;
+
+            letter-spacing: -3px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .orange {
+
+            color: #ed7000;
+        }
+
+
+        .green-text {
+
+            color: #17882c;
+        }
+
+
+        /* =========================
+           HERO DESCRIPTION
+        ========================= */
+
+        .hero-description {
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            max-width: 650px;
+
+            color: #59463b;
+        }
+
+
+        /* =========================
+           HERO BUTTONS
+        ========================= */
+
+        .hero-buttons {
+
+            margin-top: 32px;
+
+            display: flex;
+
+            gap: 15px;
+        }
+
+
+        .primary-button {
+
+            padding: 14px 28px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: #ed7000;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .primary-button:hover {
+
+            background: #d96000;
+
+            transform: translateY(-2px);
+        }
+
+
+        .secondary-button {
+
+            padding: 14px 28px;
+
+            border: 1px solid #e5cbbb;
+
+            border-radius: 12px;
+
+            background: white;
+
+            color: #5c4031;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+
+        .secondary-button:hover {
+
+            border-color: #ed7000;
+
+            color: #ed7000;
+        }
+
+
+        /* =========================
+           LOGIN CARD
+        ========================= */
+
+        .login-card {
+
+            background: white;
+
+            border: 1px solid #f0ddd0;
+
+            border-radius: 20px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 12px 40px
+                rgba(76,35,12,0.10);
+        }
+
+
+        .login-card h2 {
+
+            text-align: center;
+
+            font-size: 23px;
+
+            margin-bottom: 27px;
+        }
+
+
+        .login-card h2 span {
+
+            color: #ed7000;
+        }
+
+
+        /* =========================
+           INPUTS
+        ========================= */
+
+        .input-box {
+
+            position: relative;
+
+            margin-bottom: 17px;
+        }
+
+
+        .input-box input {
+
+            width: 100%;
+
+            padding:
+                15px
+                15px
+                15px
+                45px;
+
+            border:
+                1px solid #e5d3c7;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            background: #fffdfb;
+        }
+
+
+        .input-box input:focus {
+
+            border-color: #ed7000;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(237,112,0,0.08);
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 13px;
+
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           FORGOT PASSWORD
+        ========================= */
+
+        .forgot {
+
+            text-align: right;
+
+            margin: -4px 0 15px;
+        }
+
+
+        .forgot a {
+
+            color: #e76500;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           REMEMBER
+        ========================= */
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 14px;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-button {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #f47700,
+                    #ee6300
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .login-button:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 7px 18px
+                rgba(237,101,0,0.2);
+        }
+
+
+        /* =========================
+           OR
+        ========================= */
+
+        .or {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 22px 0;
+
+            color: #897568;
+
+            font-size: 13px;
+        }
+
+
+        .or::before,
+        .or::after {
+
+            content: "";
+
+            height: 1px;
+
+            background: #eadbd0;
+
+            flex: 1;
+        }
+
+
+        /* =========================
+           GOOGLE BUTTON
+        ========================= */
+
+        .google-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border:
+                1px solid #eadbd0;
+
+            border-radius: 12px;
+
+            background: white;
+
+            cursor: pointer;
+
+            font-size: 15px;
+        }
+
+
+        .google-button:hover {
+
+            background: #fff7ef;
+        }
+
+
+        /* =========================
+           REGISTER TEXT
+        ========================= */
+
+        .register-text {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            font-size: 14px;
+
+            color: #705d51;
+        }
+
+
+        .register-text a {
+
+            color: #e96800;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+
+            margin:
+                0 5%
+                60px;
+
+            padding: 28px;
+
+            background: white;
+
+            border:
+                1px solid #f0ddd0;
+
+            border-radius: 17px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            box-shadow:
+                0 5px 22px
+                rgba(73,33,12,0.05);
+        }
+
+
+        .stat {
+
+            text-align: center;
+
+            border-right:
+                1px solid #ead9ce;
+        }
+
+
+        .stat:last-child {
+
+            border-right: none;
+        }
+
+
+        .stat-icon {
+
+            font-size: 28px;
+
+            color: #e87500;
+        }
+
+
+        .stat:nth-child(even)
+        .stat-icon {
+
+            color: #18852c;
+        }
+
+
+        .stat strong {
+
+            display: block;
+
+            font-size: 20px;
+
+            margin-top: 5px;
+        }
+
+
+        .stat p {
+
+            font-size: 13px;
+
+            color: #776359;
+        }
+
+
+        /* =========================
+           GENERAL SECTIONS
+        ========================= */
+
+        .section {
+
+            padding: 70px 5%;
+        }
+
+
+        .section-title {
+
+            text-align: center;
+
+            font-size: 31px;
+
+            color: #4a2b1c;
+
+            margin-bottom: 40px;
+        }
+
+
+        .section-title::before,
+        .section-title::after {
+
+            content: "";
+
+            display: inline-block;
+
+            width: 55px;
+
+            height: 2px;
+
+            background: #e87500;
+
+            vertical-align: middle;
+
+            margin: 0 18px;
+        }
+
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .feature-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(5,1fr);
+
+            gap: 18px;
+        }
+
+
+        .feature {
+
+            background: white;
+
+            border:
+                1px solid #f0ddd0;
+
+            border-radius: 16px;
+
+            padding: 28px 18px;
+
+            text-align: center;
+
+            box-shadow:
+                0 5px 18px
+                rgba(73,33,12,0.05);
+
+            transition: 0.25s;
+        }
+
+
+        .feature:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 12px 28px
+                rgba(73,33,12,0.1);
+        }
+
+
+        .feature-icon {
+
+            font-size: 32px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .feature h3 {
+
+            font-size: 16px;
+
+            margin-bottom: 9px;
+        }
+
+
+        .feature p {
+
+            font-size: 13px;
+
+            color: #725f54;
+        }
+
+
+        /* =========================
+           HOW IT WORKS
+        ========================= */
+
+        .how {
+
+            background: #fff6ed;
+        }
+
+
+        .steps {
+
+            max-width: 1050px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            gap: 30px;
+        }
+
+
+        .step {
+
+            text-align: center;
+        }
+
+
+        .step-icon {
+
+            width: 72px;
+
+            height: 72px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            border:
+                2px solid #f3d7c2;
+
+            background: white;
+
+            display: grid;
+
+            place-items: center;
+
+            font-size: 27px;
+
+            color: #e87500;
+        }
+
+
+        .step:nth-child(even)
+        .step-icon {
+
+            color: #17882c;
+        }
+
+
+        .step-number {
+
+            display: inline-block;
+
+            margin: 10px 0 8px;
+
+            padding: 2px 10px;
+
+            border-radius: 12px;
+
+            background: #ed7000;
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+
+        .step:nth-child(even)
+        .step-number {
+
+            background: #18852c;
+        }
+
+
+        .step h3 {
+
+            font-size: 16px;
+        }
+
+
+        .step p {
+
+            font-size: 13px;
+
+            color: #756156;
+
+            margin-top: 6px;
+        }
+
+
+        /* =========================
+           SECURITY
+        ========================= */
+
+        .security {
+
+            text-align: center;
+
+            background: white;
+        }
+
+
+        .security p {
+
+            max-width: 850px;
+
+            margin: auto;
+
+            color: #655249;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #29170e;
+
+            color: white;
+
+            padding:
+                40px 5%
+                20px;
+        }
+
+
+        .footer {
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr
+                repeat(4,1fr);
+
+            gap: 30px;
+
+            align-items: center;
+        }
+
+
+        .footer-brand {
+
+            display: flex;
+
+            gap: 15px;
+
+            align-items: center;
+        }
+
+
+        .footer-logo {
+
+            width: 70px;
+
+            height: 70px;
+
+            border-radius: 8px;
+
+            object-fit: cover;
+
+            background: white;
+        }
+
+
+        .footer-brand h3 {
+
+            font-size: 17px;
+        }
+
+
+        .footer-brand h3 span {
+
+            color: #f28a16;
+        }
+
+
+        .footer-brand p {
+
+            font-size: 12px;
+
+            color: #d2c2b9;
+
+            margin-top: 5px;
+        }
+
+
+        .footer-item {
+
+            text-align: center;
+        }
+
+
+        .footer-item div {
+
+            font-size: 25px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .footer-item p {
+
+            font-size: 13px;
+
+            color: #d9ccc4;
+        }
+	.footer-email {
+    text-align: center;
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 14px;
+    color: #d9ccc4;
+}
+
+.footer-email a {
+    color: #ffb15c;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: 0.2s;
+}
+
+.footer-email a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+
+.copyright {
+
+    text-align: center;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    margin-top: 25px;
+
+    padding-top: 18px;
+
+    font-size: 12px;
+
+    color: #bcaea6;
+}
+
+
+        .copyright {
+
+            text-align: center;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            margin-top: 25px;
+
+            padding-top: 18px;
+
+            font-size: 12px;
+
+            color: #bcaea6;
+        }
+
+
+        /* =========================
+           REGISTER POPUP
+        ========================= */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(30,13,5,0.65);
+
+            z-index: 2000;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+
+        .modal.show {
+
+            display: flex;
+        }
+
+
+        .modal-box {
+
+            width:
+                min(440px,100%);
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 32px;
+
+            position: relative;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.3);
+        }
+
+
+        .close {
+
+            position: absolute;
+
+            top: 10px;
+
+            right: 17px;
+
+            border: none;
+
+            background: none;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            color: #765f51;
+        }
+
+
+        .modal-box h2 {
+
+            text-align: center;
+
+            margin-bottom: 23px;
+        }
+
+
+        .modal-box h2 span {
+
+            color: #ed7000;
+        }
+
+
+        .register-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: #ed7000;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .modal-note {
+
+            text-align: center;
+
+            margin-top: 13px;
+
+            font-size: 12px;
+
+            color: #806e63;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width:1000px) {
+
+            nav {
+                gap: 15px;
+            }
+
+            .hero {
+
+                grid-template-columns: 1fr;
+
+                gap: 40px;
+            }
+
+            .login-card {
+
+                max-width: 500px;
+
+                width: 100%;
+
+                margin: auto;
+            }
+
+            .feature-grid {
+
+                grid-template-columns:
+                    repeat(3,1fr);
+            }
+
+            .footer {
+
+                grid-template-columns:
+                    repeat(3,1fr);
+            }
+        }
+
+
+        @media(max-width:700px) {
+
+            header {
+
+                padding: 15px 20px;
+
+                flex-wrap: wrap;
+            }
+
+            .brand-name {
+
+                font-size: 31px;
+            }
+
+            .flag-image {
+
+                width: 58px;
+
+                height: 39px;
+            }
+
+            nav {
+
+                order: 3;
+
+                width: 100%;
+
+                justify-content: center;
+
+                overflow-x: auto;
+            }
+
+            nav a {
+
+                white-space: nowrap;
+            }
+
+            .hero {
+
+                padding:
+                    50px 25px;
+            }
+
+            .hero h1 {
+
+                font-size: 48px;
+            }
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+            .stat {
+
+                padding: 15px;
+
+                border: none;
+            }
+
+            .feature-grid {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+            .steps {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+        }
+
+
+        @media(max-width:500px) {
+
+            .stats {
+
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+
+                grid-template-columns: 1fr;
+            }
+
+            .footer {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+            .footer-brand {
+
+                grid-column: 1 / -1;
+            }
+
+            .hero-buttons {
+
+                flex-direction: column;
+            }
+
+            .primary-button,
+            .secondary-button {
+
+                width: 100%;
+            }
+        }
+	/* ================================
+   Veri-Byte Chatbot
+================================ */
+
+.chatbot-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+    font-family: inherit;
+}
+
+.chatbot-button {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background: #ff9f43;
+    color: #ffffff;
+    font-size: 25px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: 0.25s ease;
+}
+
+.chatbot-button:hover {
+    transform: scale(1.08);
+}
+
+.chatbot-box {
+    position: absolute;
+    right: 0;
+    bottom: 75px;
+    width: 350px;
+    height: 480px;
+    background: #171717;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
+
+    display: none;
+    flex-direction: column;
+}
+
+.chatbot-box.active {
+    display: flex;
+}
+
+.chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px;
+    background: #202020;
+    color: #ffffff;
+}
+
+.chatbot-header strong {
+    display: block;
+    font-size: 15px;
+}
+
+.chatbot-header span {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    color: #65d68a;
+}
+
+.chatbot-header button {
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.chatbot-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bot-message,
+.user-message {
+    max-width: 80%;
+    padding: 11px 14px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background: #292929;
+    color: #eeeeee;
+    border-bottom-left-radius: 4px;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: #ff9f43;
+    color: #ffffff;
+    border-bottom-right-radius: 4px;
+}
+
+.chatbot-input-area {
+    display: flex;
+    padding: 12px;
+    gap: 8px;
+    background: #202020;
+}
+
+.chatbot-input-area input {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    outline: none;
+    background: #111111;
+    color: #ffffff;
+}
+
+.chatbot-input-area input::placeholder {
+    color: #999999;
+}
+
+.chatbot-input-area button {
+    width: 42px;
+    border: none;
+    border-radius: 10px;
+    background: #ff9f43;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+@media (max-width: 500px) {
+
+    .chatbot-container {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .chatbot-box {
+        width: calc(100vw - 30px);
+        height: 450px;
+    }
+
+}
+
+/* ========================================================
+   VERIFICATION SUITE STYLES (Cyber-Amber Theme)
+======================================================== */
+.verify-section {
+    padding: 80px 6%;
+    background: radial-gradient(circle at 50% 10%, rgba(237, 112, 0, 0.08), transparent 60%), #fffaf5;
+    border-top: 1px solid #f2dfd0;
+    border-bottom: 1px solid #f2dfd0;
+}
+
+.section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 30px;
+    background: white;
+    border: 1px solid #ffcc99;
+    color: #ed7000;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(237, 112, 0, 0.1);
+}
+
+.verify-header {
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto 40px auto;
+}
+
+.verify-header h2 {
+    font-size: 38px;
+    letter-spacing: -1.5px;
+    color: #2b1a12;
+    margin-bottom: 14px;
+}
+
+.verify-header p {
+    font-size: 16px;
+    color: #6b5344;
+    line-height: 1.65;
+}
+
+/* Quick test pill selector */
+.quick-test-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 35px;
+    padding: 16px 20px;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #eedbce;
+    box-shadow: 0 4px 20px rgba(82, 38, 14, 0.05);
+}
+
+.quick-test-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #6b4d3a;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.test-pill-btn {
+    padding: 8px 16px;
+    border: 1px solid #ffd1a4;
+    border-radius: 20px;
+    background: #fff8f0;
+    color: #7a3e14;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.test-pill-btn:hover {
+    background: #ed7000;
+    color: white;
+    border-color: #ed7000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(237, 112, 0, 0.25);
+}
+
+.test-pill-btn.active {
+    background: #2b1a12;
+    color: #ff9a2e;
+    border-color: #ff9a2e;
+}
+
+/* Dual upload grid */
+.workstation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 900px) {
+    .workstation-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.upload-panel {
+    background: white;
+    border: 1px solid #eddcd0;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(76, 35, 12, 0.07);
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: #2b1a12;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.panel-desc {
+    font-size: 13px;
+    color: #7b6659;
+    margin-bottom: 20px;
+}
+
+.dropzone {
+    border: 2px dashed #e5cbba;
+    border-radius: 14px;
+    padding: 32px 20px;
+    text-align: center;
+    background: #fffdfa;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+.dropzone:hover, .dropzone.dragover {
+    border-color: #ed7000;
+    background: #fff6ee;
+}
+
+.dropzone-icon {
+    font-size: 38px;
+    margin-bottom: 10px;
+    color: #ed7000;
+}
+
+.dropzone-text strong {
+    color: #2b1a12;
+    font-size: 15px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.dropzone-text span {
+    color: #937d70;
+    font-size: 12px;
+}
+
+.file-preview-wrap {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    background: #fff5eb;
+    border: 1px solid #ffd4b0;
+    border-radius: 10px;
+}
+
+.preview-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #e1b997;
+}
+
+.file-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.file-details .file-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2b1a12;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-details .file-size {
+    font-size: 11px;
+    color: #8a7162;
+    margin-top: 2px;
+}
+
+.btn-remove-file {
+    background: none;
+    border: none;
+    color: #c0392b;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px 8px;
+}
+
+/* Biometric options tabs */
+.mode-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    background: #f7ede3;
+    padding: 4px;
+    border-radius: 12px;
+}
+
+.mode-tab {
+    flex: 1;
+    padding: 8px 10px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6d5445;
+    cursor: pointer;
+    transition: 0.2s;
+    text-align: center;
+}
+
+.mode-tab.active {
+    background: white;
+    color: #ed7000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.webcam-box {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #140b07;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.webcam-box video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.webcam-oval {
+    position: absolute;
+    width: 130px;
+    height: 170px;
+    border: 2px dashed rgba(255, 154, 46, 0.85);
+    border-radius: 50%;
+    box-shadow: 0 0 25px rgba(237, 112, 0, 0.4) inset;
+    pointer-events: none;
+}
+
+.webcam-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.webcam-btn {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #ffd3ad;
+    background: #fff5eb;
+    color: #924700;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.webcam-btn:hover {
+    background: #ed7000;
+    color: white;
+}
+
+/* Action button area */
+.action-strip {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 30px 0;
+}
+
+.btn-analyze {
+    padding: 16px 48px;
+    background: linear-gradient(135deg, #f77c00, #d95e00);
+    color: white;
+    font-size: 17px;
+    font-weight: 800;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 25px rgba(237, 112, 0, 0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-analyze:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(237, 112, 0, 0.45);
+}
+
+.btn-analyze:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-reset {
+    padding: 16px 26px;
+    background: white;
+    color: #634b3d;
+    border: 1px solid #e2cbba;
+    border-radius: 14px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-reset:hover {
+    border-color: #ed7000;
+    color: #ed7000;
+}
+
+/* Pipeline Stepper */
+.pipeline-stepper {
+    background: white;
+    border: 1px solid #f0ded0;
+    border-radius: 20px;
+    padding: 24px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(82, 38, 14, 0.06);
+}
+
+.stepper-header {
+    font-size: 14px;
+    font-weight: 700;
+    color: #7b5b46;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.steps-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+@media (max-width: 800px) {
+    .steps-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.step-card {
+    padding: 14px;
+    border-radius: 12px;
+    background: #fffdfb;
+    border: 1px solid #eddcd0;
+    transition: all 0.3s ease;
+}
+
+.step-card.active {
+    border-color: #ed7000;
+    background: #fff7ee;
+    box-shadow: 0 0 15px rgba(237, 112, 0, 0.2);
+}
+
+.step-card.completed {
+    border-color: #27ae60;
+    background: #f0faf3;
+}
+
+.step-card.error {
+    border-color: #e74c3c;
+    background: #fdf2f2;
+}
+
+.step-status-icon {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.step-card h4 {
+    font-size: 13px;
+    color: #2b1a12;
+    margin-bottom: 4px;
+}
+
+.step-card p {
+    font-size: 11px;
+    color: #7a6557;
+    line-height: 1.4;
+}
+
+/* Results Section */
+.results-wrapper {
+    margin-top: 35px;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes verdictPop {
+    0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.96);
+    }
+    65% {
+        opacity: 1;
+        transform: translateY(-3px) scale(1.01);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes tagPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+    }
+    50% {
+        transform: scale(1.04);
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes tagIconFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.verdict-banner {
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    padding: 36px 28px;
+    text-align: center;
+    color: #ffffff !important;
+    margin-bottom: 25px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+    transition: all 0.4s ease;
+}
+
+.verdict-banner.animate-pop {
+    animation: verdictPop 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.verdict-banner::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.verdict-banner.PASS,
+.verdict-banner.APPROVED {
+    background: linear-gradient(135deg, #10b981 0%, #059669 55%, #047857 100%);
+    box-shadow: 0 14px 40px rgba(16, 185, 129, 0.32);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.verdict-banner.REVIEW,
+.verdict-banner.MANUAL_REVIEW,
+.verdict-banner.SUSPICIOUS {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 55%, #b45309 100%);
+    box-shadow: 0 14px 40px rgba(245, 158, 11, 0.32);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.verdict-banner.REJECT,
+.verdict-banner.REJECTED,
+.verdict-banner.FRAUD {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 55%, #991b1b 100%);
+    box-shadow: 0 14px 40px rgba(239, 68, 68, 0.32);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.verdict-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 24px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(8px);
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #ffffff !important;
+    margin-bottom: 14px;
+    animation: tagPulse 2.2s ease-in-out infinite;
+}
+
+.verdict-tag-icon {
+    display: inline-block;
+    font-size: 20px;
+    animation: tagIconFloat 1.8s ease-in-out infinite;
+}
+
+.verdict-banner h3 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    letter-spacing: -0.3px;
+}
+
+.verdict-banner p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.95) !important;
+    max-width: 720px;
+    margin: 0 auto;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Account Persistence Prompt Banner */
+.account-callout {
+    padding: 18px 24px;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.account-callout.guest {
+    background: #fff8f0;
+    border: 1px solid #ffd9b8;
+    color: #6b3e15;
+}
+
+.account-callout.logged-in {
+    background: #edfbf2;
+    border: 1px solid #b3e7c3;
+    color: #1b6332;
+}
+
+.callout-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.callout-icon {
+    font-size: 28px;
+}
+
+.callout-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-save-scan {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: #ed7000;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-save-scan:hover {
+    background: #d86000;
+}
+
+/* KPI Cards Row */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 1100px) {
+    .kpi-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .kpi-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .kpi-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* National Database Registry Status Section */
+.registry-box {
+    background: white;
+    border: 1px solid #eddcd0;
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 20px rgba(82, 38, 14, 0.05);
+}
+
+.registry-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0e3d8;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.registry-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.registry-icon {
+    font-size: 26px;
+    background: #fff5eb;
+    border: 1px solid #fed7aa;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.registry-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #2b1a12;
+    margin: 0 0 2px 0;
+}
+
+.registry-subtitle {
+    font-size: 13px;
+    color: #7b6557;
+    margin: 0;
+}
+
+.badge-registry {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.badge-registry.registered {
+    background: #e6f7ee;
+    color: #0e6245;
+    border: 1px solid #a3e6cd;
+}
+
+.badge-registry.unregistered {
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+}
+
+.badge-registry.mismatch {
+    background: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+}
+
+.registry-callout {
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 5px;
+}
+
+.registry-callout.unregistered {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+}
+
+.registry-callout.registered {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+}
+
+.registry-callout.mismatch {
+    background: #fffdf5;
+    border: 1px solid #fef3c7;
+}
+
+.registry-callout h4 {
+    font-size: 16px;
+    font-weight: 800;
+    margin: 0 0 8px 0;
+}
+
+.registry-callout.unregistered h4 {
+    color: #1e293b;
+}
+
+.registry-callout.registered h4 {
+    color: #15803d;
+}
+
+.registry-callout.mismatch h4 {
+    color: #b45309;
+}
+
+.registry-callout p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0 0 10px 0;
+    color: #475569;
+}
+
+.registry-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.registered-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #dcfce7;
+}
+
+.reg-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.reg-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.reg-val {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.kpi-card {
+    background: white;
+    border: 1px solid #eddcd0;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(82, 38, 14, 0.05);
+}
+
+.kpi-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #8c7365;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.kpi-value {
+    font-size: 28px;
+    font-weight: 800;
+    color: #2b1a12;
+    margin-bottom: 6px;
+}
+
+.kpi-sub {
+    font-size: 12px;
+    color: #7b6557;
+}
+
+/* Side by side ELA comparison */
+.ela-box {
+    background: white;
+    border: 1px solid #eddcd0;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.ela-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+@media (max-width: 700px) {
+    .ela-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ela-view {
+    text-align: center;
+}
+
+.ela-view img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 1px solid #eddcd0;
+    background: #111;
+}
+
+.ela-view span {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #6d5445;
+}
+
+/* OCR table */
+.ocr-box {
+    background: white;
+    border: 1px solid #eddcd0;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.ocr-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.ocr-table th, .ocr-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f2e2d6;
+    text-align: left;
+}
+
+.ocr-table th {
+    color: #8c7365;
+    font-weight: 600;
+    width: 35%;
+}
+
+.ocr-table td {
+    color: #2b1a12;
+    font-weight: 700;
+}
+
+/* Report box */
+.report-box {
+    background: #20130c;
+    color: #f5ece5;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    padding-bottom: 12px;
+}
+
+.report-pre {
+    background: #150b06;
+    padding: 16px;
+    border-radius: 10px;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    max-height: 300px;
+    overflow-y: auto;
+    color: #ffd8b3;
+}
+
+/* Header logged in styles */
+.header-user-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(40, 15, 5, 0.4);
+    border: 1px solid #ff9a2e;
+    padding: 8px 16px;
+    border-radius: 25px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.header-btn-dash {
+    background: #ed7000;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.header-btn-dash:hover {
+    background: #d86000;
+}
+
+.header-btn-logout {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 9px 15px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.header-btn-logout:hover {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+
+    <div class="brand">
+
+
+        <!-- YOUR INDIAN FLAG -->
+
+        <img
+            src="INDIAN_FLAG.jpg"
+            alt="Indian Flag"
+            class="flag-image"
+        >
+
+
+        <div>
+
+            <div class="brand-name">
+
+                <span>V</span>eri-Byte
+
+            </div>
+
+
+            <div class="brand-subtitle">
+
+                A Project of
+
+                <span>
+                    Hexa-Byte
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <nav>
+
+        <a
+            href="#"
+            class="active">
+            Home
+        </a>
+
+        <a
+            href="#verifySection"
+            style="color: #ff9a2e; font-weight: bold;">
+            ⚡ Verify Now
+        </a>
+
+        <a href="#about">
+            About Us
+        </a>
+
+        <a href="#features">
+            Features
+        </a>
+
+        <a href="#how">
+            How It Works
+        </a>
+
+        <a href="#security">
+            Security
+        </a>
+
+        <a href="#contact">
+            Contact
+        </a>
+
+    </nav>
+
+    <div id="headerAuthArea" style="display: flex; align-items: center; gap: 10px;">
+        <button
+            class="header-login"
+            id="headerLoginBtn"
+            onclick="scrollToLogin()">
+            👤 Login
+        </button>
+        <a
+            href="register.html"
+            class="header-login"
+            id="headerRegisterBtn"
+            style="background: #ed7000; border-color: #ed7000; text-decoration: none;">
+            ✨ Create Account
+        </a>
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section
+    class="hero"
+    id="about">
+
+
+    <div>
+
+
+        <div class="badge">
+
+            🛡️ &nbsp;
+
+            <span>
+                AI-Powered
+            </span>
+
+            &nbsp; • &nbsp;
+
+            Secure
+
+            &nbsp; • &nbsp;
+
+            Accurate
+
+        </div>
+
+
+
+        <h1>
+
+            Verify Today,
+
+            <br>
+
+            <span class="orange">
+                Trust
+            </span>
+
+            <span class="green-text">
+                Always.
+            </span>
+
+        </h1>
+
+
+
+        <p class="hero-description">
+
+            <strong>
+                Veri-Byte
+            </strong>
+
+            is an AI-driven face verification
+            platform designed to help authenticate
+            identities with precision, security
+            and reliability.
+
+            <br><br>
+
+            Our platform combines AI face matching,
+            live verification, document processing
+            and security checks into one simple
+            workflow.
+
+        </p>
+
+
+
+        <div class="hero-buttons">
+
+            <button
+                class="primary-button"
+                onclick="scrollToVerification()">
+                ⚡ Verify Now →
+            </button>
+
+            <a
+                href="#features"
+                class="secondary-button">
+                Explore Features
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- =========================
+         LOGIN
+    ========================= -->
+
+    <div
+        class="login-card"
+        id="loginCard">
+
+        <!-- LOGGED-IN CARD STATE -->
+        <div id="loggedInCard" style="display: none; text-align: center;">
+            <div style="font-size: 40px; margin-bottom: 12px;">🛡️</div>
+            <h3 style="font-size: 22px; margin-bottom: 8px;">
+                Welcome, <span id="heroUserName" style="color: #ed7000;">User</span>!
+            </h3>
+            <p style="color: #6d5445; font-size: 14px; line-height: 1.6; margin-bottom: 24px;">
+                You are securely logged in with Supabase Authentication. All verification scans you run are automatically synced to your cloud account.
+            </p>
+            <a href="dashboard.html" class="primary-button" style="display: block; text-align: center; margin-bottom: 12px; text-decoration: none;">
+                📊 View Cloud Dashboard →
+            </a>
+            <button type="button" class="secondary-button" style="width: 100%; margin-bottom: 16px;" onclick="scrollToVerification()">
+                ⚡ Run New Verification Scan
+            </button>
+            <a href="#" onclick="logout(); return false;" style="color: #c0392b; font-size: 13px; text-decoration: underline;">
+                Sign out of account
+            </a>
+        </div>
+
+        <!-- GUEST LOGIN CARD STATE -->
+        <div id="guestLoginCard">
+            <h2>
+                Login to
+                <span>
+                    Veri-Byte
+                </span>
+            </h2>
+
+            <form
+                onsubmit="login(event)">
+
+                <div class="input-box">
+                    <span class="input-icon">
+                        👤
+                    </span>
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="Email Address"
+                        required>
+                </div>
+
+                <div class="input-box">
+                    <span class="input-icon">
+                        🔒
+                    </span>
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Password"
+                        required>
+                </div>
+
+                <div class="forgot">
+                    <a href="#">
+                        Forgot Password?
+                    </a>
+                </div>
+
+                <label class="remember">
+                    <input
+                        type="checkbox">
+                    Remember Me
+                </label>
+
+                <button
+                    type="submit"
+                    class="login-button">
+                    Login
+                </button>
+
+            </form>
+
+            <div class="or">
+                OR
+            </div>
+
+            <button
+                class="google-button"
+                onclick="googleLogin()">
+                🌐 &nbsp;
+                Login with Google
+            </button>
+
+            <div class="register-text">
+                New to Veri-Byte?
+                <a href="register.html">
+                    Create an account
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<div class="stats">
+
+
+    <div class="stat">
+
+     <div class="stat-icon">
+            👥
+        </div>
+
+        <strong>
+            100+
+        </strong>
+
+        <p>
+            Verification Tests
+        </p>
+
+    </div>
+
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            🛡️
+        </div>
+
+        <strong>
+            AI Powered
+        </strong>
+
+        <p>
+            Advanced Face Matching
+        </p>
+
+    </div>
+
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            ◷
+        </div>
+
+        <strong>
+            Real-Time
+        </strong>
+
+        <p>
+            Fast Processing
+        </p>
+
+    </div>
+
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            🔐
+        </div>
+
+        <strong>
+            Privacy First
+        </strong>
+
+        <p>
+            Secure Data Handling
+        </p>
+
+    </div>
+
+
+</div>
+
+<!-- ========================================================
+     VERIFICATION SUITE SECTION (Direct & Authenticated Scan)
+======================================================== -->
+<section class="verify-section" id="verifySection">
+    <div class="verify-header">
+        <div class="section-badge">
+            ⚡ AI Biometric & Forensic Inspection
+        </div>
+        <h2>Forensic Document Verification Station</h2>
+        <p>
+            Authenticate national identity credentials with real-time neural facial biometrics,
+            SigLIP synthetic deepfake detection, Error Level Analysis (ELA) tampering maps,
+            and official government database cross-verification.
+        </p>
+    </div>
+
+    <!-- Dual Input Workstation Grid -->
+    <div class="workstation-grid">
+        <!-- Panel 1: Document Upload -->
+        <div class="upload-panel">
+            <div class="panel-title">
+                <span>📄</span> 1. Identity Document
+            </div>
+            <div class="panel-desc">
+                Upload front side of Aadhaar, PAN card, Passport, or Voter ID (JPG / PNG / WebP).
+            </div>
+
+            <div class="dropzone" id="documentDropzone" onclick="document.getElementById('docFileInput').click()">
+                <div class="dropzone-icon">📁</div>
+                <div class="dropzone-text">
+                    <strong>Click to browse or drag &amp; drop document</strong>
+                    <span>Maximum file size: 10 MB. High-resolution photos recommended.</span>
+                </div>
+                <input type="file" id="docFileInput" accept="image/jpeg,image/png,image/jpg,image/webp" style="display:none;" onchange="handleDocFileChange(event)">
+            </div>
+
+            <div id="docFilePreviewWrap" class="file-preview-wrap" style="display:none;">
+                <img id="docPreviewImg" class="preview-thumb" src="" alt="Document Preview">
+                <div class="file-details">
+                    <div id="docFileName" class="file-name">document.jpg</div>
+                    <div id="docFileSize" class="file-size">1.2 MB</div>
+                </div>
+                <button type="button" class="btn-remove-file" onclick="removeDocFile()" title="Remove file">×</button>
+            </div>
+        </div>
+
+        <!-- Panel 2: Live Biometric Capture / Selfie -->
+        <div class="upload-panel">
+            <div class="panel-title">
+                <span>👤</span> 2. Live Biometric Face Check
+            </div>
+            <div class="panel-desc">
+                Capture live selfie via camera or upload a face photograph for 1:1 facial biometric matching.
+            </div>
+
+            <!-- Mode Tabs -->
+            <div class="mode-tabs">
+                <button type="button" class="mode-tab active" id="tabWebcam" onclick="setBiometricMode('webcam')">📷 Live Camera</button>
+                <button type="button" class="mode-tab" id="tabUpload" onclick="setBiometricMode('upload')">📁 Upload Photo</button>
+                <button type="button" class="mode-tab" id="tabDocOnly" onclick="setBiometricMode('doc_only')">📄 Document Only</button>
+            </div>
+
+            <!-- Webcam Mode Container -->
+            <div id="webcamContainer">
+                <div class="webcam-box" id="webcamBox">
+                    <video id="webcamVideo" autoplay playsinline muted style="display:none;"></video>
+                    <div class="webcam-oval" id="webcamOval" style="display:none;"></div>
+                    <div id="webcamPlaceholder" style="color:#d4b39b; font-size:14px; text-align:center; padding: 20px;">
+                        <div style="font-size:36px; margin-bottom:8px;">📷</div>
+                        Click "Start Camera" to initiate live face capture.
+                    </div>
+                </div>
+
+                <div class="webcam-controls">
+                    <button type="button" class="webcam-btn" id="btnStartCamera" onclick="startWebcam()">🎥 Start Camera</button>
+                    <button type="button" class="webcam-btn" id="btnCaptureSnapshot" onclick="captureSnapshot()" style="display:none; background:#ed7000; color:white;">📸 Capture Selfie</button>
+                    <button type="button" class="webcam-btn" id="btnRetakeSnapshot" onclick="retakeSnapshot()" style="display:none;">↺ Retake</button>
+                </div>
+            </div>
+
+            <!-- Upload Selfie Mode Container -->
+            <div id="uploadSelfieContainer" style="display:none;">
+                <div class="dropzone" onclick="document.getElementById('selfieFileInput').click()">
+                    <div class="dropzone-icon">🤳</div>
+                    <div class="dropzone-text">
+                        <strong>Click to select selfie photograph</strong>
+                        <span>Ensure clear frontal face with good lighting.</span>
+                    </div>
+                    <input type="file" id="selfieFileInput" accept="image/jpeg,image/png,image/jpg,image/webp" style="display:none;" onchange="handleSelfieFileChange(event)">
+                </div>
+
+                <div id="selfieFilePreviewWrap" class="file-preview-wrap" style="display:none;">
+                    <img id="selfiePreviewImg" class="preview-thumb" src="" alt="Selfie Preview">
+                    <div class="file-details">
+                        <div id="selfieFileName" class="file-name">selfie.jpg</div>
+                        <div id="selfieFileSize" class="file-size">800 KB</div>
+                    </div>
+                    <button type="button" class="btn-remove-file" onclick="removeSelfieFile()" title="Remove file">×</button>
+                </div>
+            </div>
+
+            <!-- Document Only Mode Container -->
+            <div id="docOnlyContainer" style="display:none; padding: 25px 20px; background:#fff8f0; border-radius:12px; border:1px solid #fedbc0; text-align:center;">
+                <div style="font-size:32px; margin-bottom:8px;">🔍</div>
+                <strong style="color:#2b1a12; display:block; font-size:15px; margin-bottom:6px;">Document-Only Screening Active</strong>
+                <p style="color:#7b6051; font-size:13px; line-height:1.5;">
+                    Pipeline will perform OCR data extraction, ELA tampering detection, synthetic deepfake checks, and national database validation without requiring facial biometric comparison.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Action Strip -->
+    <div class="action-strip">
+        <button type="button" class="btn-analyze" id="btnRunVerification" onclick="startForensicAnalysis()">
+            <span id="analyzeBtnIcon">⚡</span>
+            <span id="analyzeBtnText">Run Forensic Verification</span>
+        </button>
+        <button type="button" class="btn-reset" onclick="resetVerification()">
+            ↺ Clear
+        </button>
+    </div>
+
+    <!-- 5-Stage Live Pipeline Stepper -->
+    <div class="pipeline-stepper" id="pipelineStepper" style="display:none;">
+        <div class="stepper-header">
+            Forensic Inspection Pipeline Progress
+        </div>
+        <div class="steps-list">
+            <div class="step-card" id="stepBiometric">
+                <div class="step-status-icon" id="iconBiometric">⏳</div>
+                <h4>1. Biometric Match</h4>
+                <p id="msgBiometric">InsightFace Buffalo_l gatekeeper awaiting start</p>
+            </div>
+            <div class="step-card" id="stepDeepfake">
+                <div class="step-status-icon" id="iconDeepfake">⏳</div>
+                <h4>2. Deepfake Check</h4>
+                <p id="msgDeepfake">SigLIP Neural Detector queued</p>
+            </div>
+            <div class="step-card" id="stepOcr">
+                <div class="step-status-icon" id="iconOcr">⏳</div>
+                <h4>3. OCR &amp; MRZ</h4>
+                <p id="msgOcr">Tesseract OCR text extraction queued</p>
+            </div>
+            <div class="step-card" id="stepTampering">
+                <div class="step-status-icon" id="iconTampering">⏳</div>
+                <h4>4. ELA Tampering</h4>
+                <p id="msgTampering">Error Level Analysis queued</p>
+            </div>
+            <div class="step-card" id="stepVerdict">
+                <div class="step-status-icon" id="iconVerdict">⏳</div>
+                <h4>5. Decision Matrix</h4>
+                <p id="msgVerdict">Deterministic verdict matrix queued</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Panel (Rendered upon verdict completion) -->
+    <div class="results-wrapper" id="resultsWrapper" style="display:none;">
+        <!-- Verdict Banner -->
+        <div class="verdict-banner" id="verdictBanner">
+            <span class="verdict-tag" id="verdictTag">VERDICT</span>
+            <h3 id="verdictTitle">Forensic Analysis Complete</h3>
+            <p id="verdictSummary">Detailed summary of the forensic inspection findings.</p>
+        </div>
+
+        <!-- Account Persistence Prompt Banner -->
+        <div class="account-callout guest" id="guestCallout">
+            <div class="callout-content">
+                <div class="callout-icon">⭐</div>
+                <div>
+                    <strong style="font-size:15px; display:block; margin-bottom:2px;">Guest Mode Verification Completed</strong>
+                    <span style="font-size:13px;">Create an account or login to permanently preserve this scan and access your complete audit history dashboard.</span>
+                </div>
+            </div>
+            <div class="callout-actions">
+                <button type="button" class="btn-save-scan" onclick="saveGuestScanPrompt()">💾 Save Scan to Account</button>
+                <a href="register.html" class="test-pill-btn" style="background:#2b1a12; color:white; border-color:#2b1a12; text-decoration:none;">Create Account</a>
+            </div>
+        </div>
+
+        <div class="account-callout logged-in" id="loggedInCallout" style="display:none;">
+            <div class="callout-content">
+                <div class="callout-icon">✅</div>
+                <div>
+                    <strong style="font-size:15px; display:block; margin-bottom:2px;">Scan Saved to Your Veri-Byte Account</strong>
+                    <span style="font-size:13px;">This verification result is recorded in your secure cloud audit log.</span>
+                </div>
+            </div>
+            <div class="callout-actions">
+                <a href="dashboard.html" class="btn-save-scan" style="text-decoration:none;">📊 View in Dashboard →</a>
+            </div>
+        </div>
+
+        <!-- KPI Metrics Grid -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="kpi-label">
+                    <span>Biometric Similarity</span>
+                    <span>👤</span>
+                </div>
+                <div class="kpi-value" id="kpiBiometric">—</div>
+                <div class="kpi-sub" id="kpiBiometricSub">Threshold: 60%</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">
+                    <span>Deepfake Probability</span>
+                    <span>🧠</span>
+                </div>
+                <div class="kpi-value" id="kpiDeepfake">—</div>
+                <div class="kpi-sub" id="kpiDeepfakeSub">AI generation risk score</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">
+                    <span>Tampering Risk</span>
+                    <span>🔬</span>
+                </div>
+                <div class="kpi-value" id="kpiTampering">—</div>
+                <div class="kpi-sub" id="kpiTamperingSub">ELA compression anomaly</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">
+                    <span>OCR Confidence</span>
+                    <span>📄</span>
+                </div>
+                <div class="kpi-value" id="kpiOcr">—</div>
+                <div class="kpi-sub" id="kpiOcrSub">Text extraction confidence</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">
+                    <span>National Registry</span>
+                    <span>🏛️</span>
+                </div>
+                <div class="kpi-value" id="kpiRegistry" style="font-size: 19px; letter-spacing: -0.5px;">—</div>
+                <div class="kpi-sub" id="kpiRegistrySub">Database Status</div>
+            </div>
+        </div>
+
+        <!-- Dedicated National Database Registry Status Section -->
+        <div class="registry-box" id="registryBox" style="display:none;">
+            <div class="registry-header-row">
+                <div class="registry-title-wrap">
+                    <span class="registry-icon">🏛️</span>
+                    <div>
+                        <h3 class="registry-title">National Identity Database Cross-Verification</h3>
+                        <p class="registry-subtitle">Official Reference Registry Check (UIDAI / NSDL / Passport Seva)</p>
+                    </div>
+                </div>
+                <div id="registryStatusBadgeWrap">
+                    <!-- Populated dynamically: REGISTERED or UNREGISTERED badge -->
+                </div>
+            </div>
+
+            <!-- Dynamic Explanatory Content -->
+            <div id="registryContent">
+                <!-- Populated dynamically based on whether info is in our database -->
+            </div>
+        </div>
+
+        <!-- ELA Side by Side Comparison -->
+        <div class="ela-box" id="elaSection" style="display:none;">
+            <div class="panel-title">
+                <span>🔬</span> Error Level Analysis (ELA) Visual Inspection
+            </div>
+            <p style="font-size:13px; color:#785f51;">
+                ELA highlights JPEG compression discrepancies. Digital tampering, spliced text, or pasted headshots illuminate brighter than uniform background compression.
+            </p>
+            <div class="ela-grid">
+                <div class="ela-view">
+                    <img id="elaOriginalImg" src="" alt="Original Document">
+                    <span>Original Document Image</span>
+                </div>
+                <div class="ela-view">
+                    <img id="elaGeneratedImg" src="" alt="ELA Heatmap">
+                    <span>ELA Compression Artifact Heatmap</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- OCR Extracted Fields Table -->
+        <div class="ocr-box" id="ocrSection" style="display:none;">
+            <div class="panel-title">
+                <span>📄</span> Extracted Document Information &amp; Registry Verification
+            </div>
+            <table class="ocr-table">
+                <tbody id="ocrTableBody">
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Full Forensic Audit Report Box -->
+        <div class="report-box">
+            <div class="report-header">
+                <strong style="font-size:16px;">📋 Official Forensic Inspection Audit Log</strong>
+                <div style="display:flex; gap:10px;">
+                    <button type="button" class="test-pill-btn" onclick="copyAuditReport()">📋 Copy Report</button>
+                    <button type="button" class="test-pill-btn" onclick="downloadAuditReport()">📥 Download Audit Report</button>
+                </div>
+            </div>
+            <pre class="report-pre" id="reportContent">Analysis report will appear here...</pre>
+        </div>
+    </div>
+</section>
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section
+    class="section"
+    id="features">
+
+
+    <h2 class="section-title">
+
+        Why Choose Veri-Byte?
+
+    </h2>
+
+
+
+    <div class="feature-grid">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🎯
+            </div>
+
+            <h3>
+                Accurate Verification
+            </h3>
+
+            <p>
+                AI-powered facial embeddings
+                help compare facial identity
+                features.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📷
+            </div>
+
+            <h3>
+                Live Capture
+            </h3>
+
+            <p>
+                Capture a live face using
+                your device camera.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📄
+            </div>
+
+            <h3>
+                Multiple Formats
+            </h3>
+
+            <p>
+                Designed to support JPG,
+                PNG and PDF documents.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🛡️
+            </div>
+
+            <h3>
+                Anti-Spoofing
+            </h3>
+
+            <p>
+                Liveness and security checks
+                can help identify suspicious
+                attempts.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🔐
+            </div>
+
+            <h3>
+                Data Security
+            </h3>
+
+            <p>
+                Verification data can be
+                protected through secure
+                backend processing.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     HOW IT WORKS
+========================= -->
+
+<section
+    class="section how"
+    id="how">
+
+
+    <h2 class="section-title">
+
+        How It Works
+
+    </h2>
+
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-icon">
+                📄
+            </div>
+
+            <span class="step-number">
+                01
+            </span>
+
+            <h3>
+                Upload Document
+            </h3>
+
+            <p>
+                Upload a reference photograph
+                or supported document.
+            </p>
+
+        </div>
+
+
+
+        <div class="step">
+
+            <div class="step-icon">
+                📷
+            </div>
+
+            <span class="step-number">
+                02
+            </span>
+
+            <h3>
+                Live Capture
+            </h3>
+
+            <p>
+                Capture the face using
+                your device camera.
+            </p>
+
+        </div>
+
+
+
+        <div class="step">
+
+            <div class="step-icon">
+                🧠
+            </div>
+
+            <span class="step-number">
+                03
+            </span>
+
+            <h3>
+                AI Verification
+            </h3>
+
+            <p>
+                AI analyzes and compares
+                the facial features.
+            </p>
+
+        </div>
+
+
+
+        <div class="step">
+
+            <div class="step-icon">
+                ✓
+            </div>
+
+            <span class="step-number">
+                04
+            </span>
+
+            <h3>
+                Get Result
+            </h3>
+
+            <p>
+                Receive the verification
+                result from the system.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     SECURITY
+========================= -->
+
+<section
+    class="section security"
+    id="security">
+
+
+    <h2 class="section-title">
+
+        Security First
+
+    </h2>
+
+
+    <p>
+
+        Veri-Byte is designed with security
+        as a core part of the verification
+        process.
+
+        Face matching, image-quality checks,
+        liveness detection and controlled
+        backend processing can work together
+        to make identity verification more
+        reliable.
+
+    </p>
+
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer id="contact">
+
+
+    <div class="footer">
+
+
+        <div class="footer-brand">
+
+
+            <!-- YOUR HEXA-BYTE LOGO -->
+
+            <img
+                src="hexabyte.png"
+                alt="Hexa-Byte Logo"
+                class="footer-logo"
+            >
+
+
+            <div>
+
+                <h3>
+
+                    A Project of
+
+                    <span>
+                        Hexa-Byte
+                    </span>
+
+                </h3>
+
+
+                <p>
+
+                    Innovating for a
+                    Secure Tomorrow.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer-item">
+
+            <div>
+                🛡
+            </div>
+
+            <p>
+                Secure
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-item">
+
+            <div>
+                ⚡
+            </div>
+
+            <p>
+                Fast
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-item">
+
+            <div>
+                🎯
+            </div>
+
+            <p>
+                Accurate
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-item">
+
+            <div>
+                👤
+            </div>
+
+            <p>
+                User Friendly
+            </p>
+
+        </div>
+
+
+    </div>
+	<p class="footer-email">
+
+            Email:
+
+            <a href="mailto:hexabytegen@gmail.com">
+                hexabytegen@gmail.com
+            </a>
+
+        </p>
+
+
+
+    <div class="copyright">
+
+        © 2026 Veri-Byte.
+        A Project of Hexa-Byte.
+        All rights reserved.
+
+    </div>
+
+
+</footer>
+
+
+
+<!-- =========================
+     REGISTER POPUP
+========================= -->
+
+<div
+    class="modal"
+    id="registerModal">
+
+
+    <div class="modal-box">
+
+
+        <button
+            class="close"
+            onclick="closeRegister()">
+
+            ×
+
+        </button>
+
+
+        <h2>
+
+            Create your
+
+            <span>
+                Veri-Byte
+            </span>
+
+            account
+
+        </h2>
+
+
+
+        <form
+            onsubmit="register(event)">
+
+
+            <div class="input-box">
+
+                <span class="input-icon">
+                    👤
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Full Name"
+                    required>
+
+            </div>
+
+
+
+            <div class="input-box">
+
+                <span class="input-icon">
+                    ✉️
+                </span>
+
+                <input
+                    type="email"
+                    placeholder="Email Address"
+                    required>
+
+            </div>
+
+
+
+            <div class="input-box">
+
+                <span class="input-icon">
+                    🔒
+                </span>
+
+                <input
+                    type="password"
+                    placeholder="Create Password"
+                    required>
+
+            </div>
+
+
+
+            <div class="input-box">
+
+                <span class="input-icon">
+                    🔐
+                </span>
+
+                <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    required>
+
+            </div>
+
+
+
+            <label class="remember">
+
+                <input
+                    type="checkbox"
+                    required>
+
+                I agree to the Terms & Conditions
+
+            </label>
+
+
+
+            <button
+                class="register-button"
+                type="submit">
+
+                Create Account
+
+            </button>
+
+
+        </form>
+
+
+
+        <p class="modal-note">
+
+            Registration will be connected
+            to the backend later.
+
+        </p>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+    const API_BASE = window.location.origin.includes(":8000") ? "" : "http://127.0.0.1:8000";
+
+    // Application state
+    let selectedIdFile = null;
+    let selectedSelfieFile = null;
+    let capturedSelfieDataUrl = null;
+    let currentBiometricMode = "webcam"; // 'webcam' | 'upload' | 'doc_only'
+    let mediaStream = null;
+    let isAnalyzing = false;
+    let lastScanData = null;
+
+    // Check Auth state on load
+    document.addEventListener("DOMContentLoaded", function() {
+        checkAuthState();
+    });
+
+    async function checkAuthState() {
+        const token = localStorage.getItem("veriByteAccessToken");
+        const headerAuthArea = document.getElementById("headerAuthArea");
+        const loggedInCard = document.getElementById("loggedInCard");
+        const guestLoginCard = document.getElementById("guestLoginCard");
+        const heroUserName = document.getElementById("heroUserName");
+
+        if (!token) {
+            if (loggedInCard) loggedInCard.style.display = "none";
+            if (guestLoginCard) guestLoginCard.style.display = "block";
+            if (headerAuthArea) {
+                headerAuthArea.innerHTML = `
+                    <button class="header-login" id="headerLoginBtn" onclick="scrollToLogin()">👤 Login</button>
+                    <a href="register.html" class="header-login" id="headerRegisterBtn" style="background:#ed7000; border-color:#ed7000; text-decoration:none;">✨ Create Account</a>
+                `;
+            }
+            return;
+        }
+
+        try {
+            const res = await fetch(API_BASE + "/me", {
+                headers: { "Authorization": "Bearer " + token }
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.detail || "Session expired");
+
+            const userName = data.name || data.email.split("@")[0] || "User";
+            if (heroUserName) heroUserName.textContent = userName;
+            if (loggedInCard) loggedInCard.style.display = "block";
+            if (guestLoginCard) guestLoginCard.style.display = "none";
+
+            if (headerAuthArea) {
+                headerAuthArea.innerHTML = `
+                    <div class="header-user-badge">👤 ${userName}</div>
+                    <a href="dashboard.html" class="header-btn-dash">📊 Dashboard</a>
+                    <button class="header-btn-logout" onclick="logout()">🚪 Logout</button>
+                `;
+            }
+
+            // Sync any pending scan from guest session
+            syncPendingGuestScan(token);
+
+        } catch (err) {
+            localStorage.removeItem("veriByteAccessToken");
+            localStorage.removeItem("veriByteRefreshToken");
+            checkAuthState();
+        }
+    }
+
+    async function syncPendingGuestScan(token) {
+        const pendingStr = sessionStorage.getItem("veriBytePendingScan");
+        if (!pendingStr) return;
+        try {
+            const scanData = JSON.parse(pendingStr);
+            const res = await fetch(API_BASE + "/api/scans/save", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify(scanData)
+            });
+            if (res.ok) {
+                sessionStorage.removeItem("veriBytePendingScan");
+                const guestCallout = document.getElementById("guestCallout");
+                const loggedInCallout = document.getElementById("loggedInCallout");
+                if (guestCallout) guestCallout.style.display = "none";
+                if (loggedInCallout) loggedInCallout.style.display = "flex";
+            }
+        } catch (e) {
+            console.warn("Could not sync pending scan:", e);
+        }
+    }
+
+    function scrollToVerification() {
+        const elem = document.getElementById("verifySection");
+        if (elem) elem.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function scrollToLogin() {
+        const elem = document.getElementById("loginCard");
+        if (elem) elem.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function logout() {
+        localStorage.removeItem("veriByteAccessToken");
+        localStorage.removeItem("veriByteRefreshToken");
+        checkAuthState();
+    }
+
+    function login(event) {
+        event.preventDefault();
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+        const body = new FormData();
+        body.append("email", email);
+        body.append("password", password);
+
+        fetch(API_BASE + "/signin", { method: "POST", body })
+            .then(async r => {
+                const data = await r.json();
+                if (!r.ok) throw new Error(data.detail || "Login failed");
+                return data;
+            })
+            .then(data => {
+                localStorage.setItem("veriByteAccessToken", data.access_token);
+                localStorage.setItem("veriByteRefreshToken", data.refresh_token || "");
+                const pending = sessionStorage.getItem("veriBytePendingScan");
+                if (pending) {
+                    syncPendingGuestScan(data.access_token).then(() => {
+                        window.location.href = "dashboard.html";
+                    });
+                } else {
+                    window.location.href = "dashboard.html";
+                }
+            })
+            .catch(err => alert(err.message));
+    }
+
+    function googleLogin() {
+        alert("Google OAuth will be connected via Supabase providers in production.");
+    }
+
+    function openRegister() {
+        window.location.href = "register.html";
+    }
+
+    function closeRegister() {
+        const modal = document.getElementById("registerModal");
+        if (modal) modal.classList.remove("show");
+    }
+
+    function register(event) {
+        event.preventDefault();
+        window.location.href = "register.html";
+    }
+
+    // Quick Sample Citizens Selector
+    async function selectCitizenSample(citizenId, citizenName, docType) {
+        try {
+            const res = await fetch(`${API_BASE}/api/database/sample-card/${citizenId}?doc_type=${docType}`);
+            if (!res.ok) throw new Error("Could not fetch sample card from registry");
+            const blob = await res.blob();
+            const file = new File([blob], `${citizenName.replace(/\s+/g, "_")}_${docType}.jpg`, { type: "image/jpeg" });
+            selectedIdFile = file;
+
+            document.getElementById("docPreviewImg").src = URL.createObjectURL(blob);
+            document.getElementById("docFileName").textContent = file.name;
+            document.getElementById("docFileSize").textContent = (file.size / 1024).toFixed(1) + " KB (Official Registry Test Card)";
+            document.getElementById("docFilePreviewWrap").style.display = "flex";
+            document.getElementById("documentDropzone").style.display = "none";
+
+            document.querySelectorAll(".test-pill-btn").forEach(b => b.classList.remove("active"));
+            if (event && event.currentTarget) event.currentTarget.classList.add("active");
+
+        } catch (err) {
+            alert("Error loading sample card: " + err.message);
+        }
+    }
+
+    // Document file handling
+    function handleDocFileChange(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        selectedIdFile = file;
+        document.getElementById("docPreviewImg").src = URL.createObjectURL(file);
+        document.getElementById("docFileName").textContent = file.name;
+        document.getElementById("docFileSize").textContent = (file.size / (1024 * 1024)).toFixed(2) + " MB";
+        document.getElementById("docFilePreviewWrap").style.display = "flex";
+        document.getElementById("documentDropzone").style.display = "none";
+    }
+
+    function removeDocFile() {
+        selectedIdFile = null;
+        document.getElementById("docFileInput").value = "";
+        document.getElementById("docFilePreviewWrap").style.display = "none";
+        document.getElementById("documentDropzone").style.display = "block";
+    }
+
+    // Selfie file handling
+    function handleSelfieFileChange(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        selectedSelfieFile = file;
+        document.getElementById("selfiePreviewImg").src = URL.createObjectURL(file);
+        document.getElementById("selfieFileName").textContent = file.name;
+        document.getElementById("selfieFileSize").textContent = (file.size / (1024 * 1024)).toFixed(2) + " MB";
+        document.getElementById("selfieFilePreviewWrap").style.display = "flex";
+    }
+
+    function removeSelfieFile() {
+        selectedSelfieFile = null;
+        document.getElementById("selfieFileInput").value = "";
+        document.getElementById("selfieFilePreviewWrap").style.display = "none";
+    }
+
+    // Biometric Mode Switching
+    function setBiometricMode(mode) {
+        currentBiometricMode = mode;
+        document.getElementById("tabWebcam").classList.toggle("active", mode === "webcam");
+        document.getElementById("tabUpload").classList.toggle("active", mode === "upload");
+        document.getElementById("tabDocOnly").classList.toggle("active", mode === "doc_only");
+
+        document.getElementById("webcamContainer").style.display = mode === "webcam" ? "block" : "none";
+        document.getElementById("uploadSelfieContainer").style.display = mode === "upload" ? "block" : "none";
+        document.getElementById("docOnlyContainer").style.display = mode === "doc_only" ? "block" : "none";
+
+        if (mode !== "webcam") {
+            stopWebcam();
+        }
+    }
+
+    // Webcam Controls
+    async function startWebcam() {
+        try {
+            stopWebcam();
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: "user" }
+            });
+            mediaStream = stream;
+            const video = document.getElementById("webcamVideo");
+            video.srcObject = stream;
+            video.style.display = "block";
+            document.getElementById("webcamOval").style.display = "block";
+            document.getElementById("webcamPlaceholder").style.display = "none";
+            document.getElementById("btnStartCamera").style.display = "none";
+            document.getElementById("btnCaptureSnapshot").style.display = "inline-block";
+            document.getElementById("btnRetakeSnapshot").style.display = "none";
+        } catch (err) {
+            alert("Camera access denied or unavailable: " + err.message + "\nYou can use the 'Upload Photo' tab instead.");
+        }
+    }
+
+    function captureSnapshot() {
+        const video = document.getElementById("webcamVideo");
+        if (!video || !video.videoWidth) return;
+
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        capturedSelfieDataUrl = canvas.toDataURL("image/jpeg", 0.92);
+        stopWebcam();
+
+        video.style.display = "none";
+        document.getElementById("webcamOval").style.display = "none";
+        const placeholder = document.getElementById("webcamPlaceholder");
+        placeholder.innerHTML = `<img src="${capturedSelfieDataUrl}" style="max-height:190px; border-radius:8px; border:2px solid #27ae60;" alt="Captured Face"><div style="font-size:12px; color:#27ae60; margin-top:4px; font-weight:700;">✓ Live face snapshot recorded</div>`;
+        placeholder.style.display = "block";
+
+        document.getElementById("btnCaptureSnapshot").style.display = "none";
+        document.getElementById("btnRetakeSnapshot").style.display = "inline-block";
+    }
+
+    function retakeSnapshot() {
+        capturedSelfieDataUrl = null;
+        startWebcam();
+    }
+
+    function stopWebcam() {
+        if (mediaStream) {
+            mediaStream.getTracks().forEach(t => t.stop());
+            mediaStream = null;
+        }
+    }
+
+    // Reset Verification State
+    function resetVerification() {
+        removeDocFile();
+        removeSelfieFile();
+        capturedSelfieDataUrl = null;
+        stopWebcam();
+        document.getElementById("webcamPlaceholder").innerHTML = `
+            <div style="font-size:36px; margin-bottom:8px;">📷</div>
+            Click "Start Camera" to initiate live face capture.
+        `;
+        document.getElementById("webcamVideo").style.display = "none";
+        document.getElementById("webcamOval").style.display = "none";
+        document.getElementById("btnStartCamera").style.display = "inline-block";
+        document.getElementById("btnCaptureSnapshot").style.display = "none";
+        document.getElementById("btnRetakeSnapshot").style.display = "none";
+        document.getElementById("pipelineStepper").style.display = "none";
+        document.getElementById("resultsWrapper").style.display = "none";
+        document.querySelectorAll(".test-pill-btn").forEach(b => b.classList.remove("active"));
+    }
+
+    // Step Status Helper
+    function updateStepUI(stepKey, status, message) {
+        const stepCard = document.getElementById("step" + capitalize(stepKey));
+        const iconElem = document.getElementById("icon" + capitalize(stepKey));
+        const msgElem = document.getElementById("msg" + capitalize(stepKey));
+        if (!stepCard) return;
+
+        stepCard.className = "step-card " + (status === "active" ? "active" : status === "complete" ? "completed" : status === "error" ? "error" : "");
+        if (msgElem && message) msgElem.textContent = message;
+
+        if (iconElem) {
+            if (status === "active") iconElem.textContent = "⚡";
+            else if (status === "complete") iconElem.textContent = "✅";
+            else if (status === "error") iconElem.textContent = "❌";
+            else iconElem.textContent = "⏳";
+        }
+    }
+
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    // Execution: Run Forensic Analysis via SSE
+    async function startForensicAnalysis() {
+        if (!selectedIdFile) {
+            alert("Please select or drop an Identity Document first.");
+            scrollToVerification();
+            return;
+        }
+
+        if (isAnalyzing) return;
+        isAnalyzing = true;
+
+        const btn = document.getElementById("btnRunVerification");
+        btn.disabled = true;
+        document.getElementById("analyzeBtnIcon").textContent = "⏳";
+        document.getElementById("analyzeBtnText").textContent = "Screening In Progress...";
+
+        const stepper = document.getElementById("pipelineStepper");
+        stepper.style.display = "block";
+        ["biometric", "deepfake", "ocr", "tampering", "verdict"].forEach(k => {
+            updateStepUI(k, "pending", "Queued");
+        });
+        document.getElementById("resultsWrapper").style.display = "none";
+
+        const formData = new FormData();
+        formData.append("id_file", selectedIdFile);
+
+        if (currentBiometricMode === "upload" && selectedSelfieFile) {
+            formData.append("selfie_file", selectedSelfieFile);
+        } else if (currentBiometricMode === "webcam" && capturedSelfieDataUrl) {
+            formData.append("selfie_data", capturedSelfieDataUrl);
+        }
+
+        try {
+            const response = await fetch(API_BASE + "/api/analyze", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response.ok) {
+                let errDetail = "Analysis pipeline failed";
+                try { const j = await response.json(); errDetail = j.detail || errDetail; } catch(e){}
+                throw new Error(errDetail);
+            }
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder("utf-8");
+            let buffer = "";
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                buffer += decoder.decode(value, { stream: true });
+                const parts = buffer.split("\n\n");
+                buffer = parts.pop() || "";
+
+                for (const part of parts) {
+                    const trimmed = part.trim();
+                    if (trimmed.startsWith("data: ")) {
+                        const jsonStr = trimmed.slice(6);
+                        try {
+                            const data = JSON.parse(jsonStr);
+                            handlePipelineEvent(data);
+                        } catch (err) {
+                            console.error("SSE parse error:", err);
+                        }
+                    }
+                }
+            }
+        } catch (err) {
+            alert("Forensic Screening Error: " + err.message);
+            updateStepUI("verdict", "error", err.message);
+        } finally {
+            isAnalyzing = false;
+            btn.disabled = false;
+            document.getElementById("analyzeBtnIcon").textContent = "⚡";
+            document.getElementById("analyzeBtnText").textContent = "Run Forensic Verification";
+        }
+    }
+
+    function handlePipelineEvent(data) {
+        const { step, status, message } = data;
+        updateStepUI(step, status, message);
+
+        if (step === "verdict" && status === "complete") {
+            renderFinalResults(data);
+        }
+    }
+
+    function renderFinalResults(data) {
+        lastScanData = data;
+        const resultsWrapper = document.getElementById("resultsWrapper");
+        resultsWrapper.style.display = "block";
+
+        const verdict = data.verdict || "UNKNOWN";
+        const results = data.results || {};
+        const bio = results.biometric || {};
+        const df = results.deepfake || {};
+        const ocr = results.ocr || {};
+        const tamper = results.tampering || {};
+        const dbMatch = results.database_verification || ocr.database_verification || {};
+
+        const isRegistered = dbMatch.status === "VERIFIED_MATCH" || (dbMatch.record_found && dbMatch.status !== "DEMOGRAPHIC_MISMATCH");
+        const isMismatch = dbMatch.status === "DEMOGRAPHIC_MISMATCH";
+
+        // Verdict Banner
+        const rawVerdict = (data.verdict || "UNKNOWN").toUpperCase().trim();
+        const isApproved = rawVerdict === "APPROVED" || rawVerdict === "PASS";
+        const isReview = rawVerdict === "REVIEW" || rawVerdict === "MANUAL REVIEW" || rawVerdict === "SUSPICIOUS";
+        const isRejected = !isApproved && !isReview;
+
+        const banner = document.getElementById("verdictBanner");
+        const verdictTag = document.getElementById("verdictTag");
+        const verdictTitle = document.getElementById("verdictTitle");
+        const verdictSummary = document.getElementById("verdictSummary");
+
+        // Force animation restart so each verification triggers the pop animation
+        banner.className = "verdict-banner animate-pop";
+        void banner.offsetWidth; // trigger reflow
+
+        if (isApproved) {
+            banner.classList.add("APPROVED", "PASS");
+            verdictTag.innerHTML = '<span class="verdict-tag-icon">✅</span> APPROVED';
+            verdictTitle.textContent = "DOCUMENT AUTHENTICATED — GENUINE";
+            verdictSummary.textContent = "All forensic integrity checks passed: cryptographic check-digit valid, zero digital tampering detected, and authentic neural facial structures verified.";
+        } else if (isReview) {
+            banner.classList.add("REVIEW", "MANUAL_REVIEW");
+            verdictTag.innerHTML = '<span class="verdict-tag-icon">⚠️</span> MANUAL REVIEW';
+            verdictTitle.textContent = "MANUAL INSPECTION RECOMMENDED — SUSPICIOUS";
+            verdictSummary.textContent = "Elevated anomaly signals or borderline confidence scores detected. Secondary document cross-check advised.";
+        } else {
+            banner.classList.add("REJECT", "REJECTED");
+            verdictTag.innerHTML = '<span class="verdict-tag-icon">❌</span> REJECTED';
+            verdictTitle.textContent = "DOCUMENT REJECTED — FRAUD DETECTED";
+            verdictSummary.textContent = "Discrepancies identified in biometric facial embeddings, neural synthetic features, or digital file tampering.";
+        }
+
+        // KPI Cards
+        const bioScore = bio.match_score !== undefined ? bio.match_score : (bio.face_match_confidence || 0);
+        document.getElementById("kpiBiometric").textContent = bio.status === "skipped" ? "N/A" : bioScore.toFixed(1) + "%";
+        document.getElementById("kpiBiometricSub").textContent = bio.status === "skipped" ? "Document-only mode" : (bioScore >= 60 ? "Verified Authentic" : "Match Failed");
+
+        const dfScore = df.ai_generated_possibility !== undefined ? df.ai_generated_possibility : (df.deepfake_score || 0);
+        document.getElementById("kpiDeepfake").textContent = dfScore.toFixed(1) + "%";
+        document.getElementById("kpiDeepfakeSub").textContent = dfScore > 66 ? "High Synthetic Probability" : "Natural Human Face";
+
+        const tamperFlag = tamper.tampering_detected || false;
+        document.getElementById("kpiTampering").textContent = tamperFlag ? "ALERT" : "CLEAN";
+        document.getElementById("kpiTamperingSub").textContent = tamperFlag ? "High compression divergence" : "Uniform pixel grid";
+
+        const ocrConf = ocr.confidence_score || ocr.confidence || 90;
+        document.getElementById("kpiOcr").textContent = typeof ocrConf === "number" ? ocrConf.toFixed(0) + "%" : "90%";
+        document.getElementById("kpiOcrSub").textContent = ocr.document_type || "Government Credential";
+
+        const kpiRegElem = document.getElementById("kpiRegistry");
+        const kpiRegSubElem = document.getElementById("kpiRegistrySub");
+        if (kpiRegElem && kpiRegSubElem) {
+            if (isRegistered) {
+                kpiRegElem.textContent = "REGISTERED";
+                kpiRegElem.style.color = "#1e824c";
+                kpiRegSubElem.textContent = dbMatch.matched_citizen?.name ? "Matched: " + dbMatch.matched_citizen.name : "Found in Database";
+            } else if (isMismatch) {
+                kpiRegElem.textContent = "MISMATCH";
+                kpiRegElem.style.color = "#d35400";
+                kpiRegSubElem.textContent = "ID matches, info differs";
+            } else {
+                kpiRegElem.textContent = "UNREGISTERED";
+                kpiRegElem.style.color = "#475569";
+                kpiRegSubElem.textContent = "Not in database";
+            }
+        }
+
+        // Dedicated National Database Registry Status Section
+        const registryBox = document.getElementById("registryBox");
+        const badgeWrap = document.getElementById("registryStatusBadgeWrap");
+        const regContent = document.getElementById("registryContent");
+
+        if (registryBox && badgeWrap && regContent) {
+            registryBox.style.display = "block";
+            if (isRegistered) {
+                const cit = dbMatch.matched_citizen || {};
+                badgeWrap.innerHTML = `<span class="badge-registry registered">✅ REGISTERED</span>`;
+                regContent.innerHTML = `
+                    <div class="registry-callout registered">
+                        <h4>✅ Official Citizen Record Found in Registry</h4>
+                        <p>
+                            <strong>Status: REGISTERED</strong> — This document's information was found in our official National Identity Reference Database (UIDAI / NSDL / Passport Seva). Document details have been successfully cross-verified.
+                        </p>
+                        <div class="registered-details-grid">
+                            <div class="reg-field">
+                                <span class="reg-label">Official Registered Name</span>
+                                <span class="reg-val">${cit.name || "Verified Citizen"}</span>
+                            </div>
+                            <div class="reg-field">
+                                <span class="reg-label">Registered Date of Birth</span>
+                                <span class="reg-val">${cit.dob_formatted || cit.dob || "On Record"}</span>
+                            </div>
+                            <div class="reg-field">
+                                <span class="reg-label">Official Address</span>
+                                <span class="reg-val">${cit.address || "Verified Address"}</span>
+                            </div>
+                            <div class="reg-field">
+                                <span class="reg-label">Official ID Reference</span>
+                                <span class="reg-val">${cit.aadhaar_number || cit.pan_number || cit.passport_number || "Verified"}</span>
+                            </div>
+                            <div class="reg-field">
+                                <span class="reg-label">Issuing Authority</span>
+                                <span class="reg-val">${cit.issuing_authority || "Government of India"}</span>
+                            </div>
+                            <div class="reg-field">
+                                <span class="reg-label">Cross-Check Confidence</span>
+                                <span class="reg-val" style="color:#15803d;">${(dbMatch.confidence || 100).toFixed(0)}% Exact Record Match</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (isMismatch) {
+                const cit = dbMatch.matched_citizen || {};
+                badgeWrap.innerHTML = `<span class="badge-registry mismatch">⚠️ DEMOGRAPHIC MISMATCH</span>`;
+                const discs = (dbMatch.discrepancies || []).map(d => `<li>⚠️ ${d}</li>`).join("");
+                regContent.innerHTML = `
+                    <div class="registry-callout mismatch">
+                        <h4>⚠️ ID Number Found, but Information Conflicts with Government Records!</h4>
+                        <p>
+                            <strong>Status: REGISTERED (DEMOGRAPHIC CONFLICT)</strong> — The document number matches an official citizen record (${cit.name || "Citizen"}), but the printed name, date of birth, or text does not match government database records. This could signify a counterfeit card or tampered credential.
+                        </p>
+                        <ul style="margin:8px 0 0 18px; color:#b45309; font-size:13px; line-height:1.6;">${discs}</ul>
+                    </div>
+                `;
+            } else {
+                badgeWrap.innerHTML = `<span class="badge-registry unregistered">ℹ️ UNREGISTERED</span>`;
+                regContent.innerHTML = `
+                    <div class="registry-callout unregistered">
+                        <h4>ℹ️ Document Status: UNREGISTERED (Not Found in Database)</h4>
+                        <p>
+                            <strong>What UNREGISTERED means:</strong> This document and citizen record are <strong>not in our reference database</strong>.
+                        </p>
+                        <p style="background:#ffffff; border:1px solid #e2e8f0; padding:12px 14px; border-radius:10px; font-size:13px; color:#334155; margin-top:8px;">
+                            🛡️ <strong>How your document is authenticated:</strong> Because Veri-Byte is an advanced AI forensic screener, your card is evaluated through real-time algorithmic inspection:
+                            <br>• <strong>Verhoeff Mathematical Checksum:</strong> Validates the 12-digit UIDAI check-digit formula.
+                            <br>• <strong>Error Level Analysis (ELA):</strong> Inspects pixel compression for photoshopped text, numbers, or spliced photos.
+                            <br>• <strong>SigLIP Neural Deepfake Detector:</strong> Verifies the facial photograph is natural and not an AI-generated synthetic face.
+                            <br><em>Unregistered documents can still receive an <strong>APPROVED</strong> verdict if all forensic checks pass!</em>
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // ELA Comparison
+        const elaSection = document.getElementById("elaSection");
+        if (data.ela_image_base64) {
+            document.getElementById("elaOriginalImg").src = document.getElementById("docPreviewImg").src;
+            document.getElementById("elaGeneratedImg").src = data.ela_image_base64;
+            elaSection.style.display = "block";
+        } else {
+            elaSection.style.display = "none";
+        }
+
+        // OCR Structured Table
+        const ocrSection = document.getElementById("ocrSection");
+        const tbody = document.getElementById("ocrTableBody");
+        tbody.innerHTML = "";
+
+        const fields = [
+            { label: "Document Type", value: ocr.document_type || "NATIONAL_ID" },
+            { label: "Detected Name", value: ocr.extracted_name || dbMatch.matched_citizen?.name || "Detected via OCR" },
+            { label: "ID / Aadhaar Number", value: ocr.extracted_id || dbMatch.matched_citizen?.aadhaar_number || "Verified in OCR text" },
+            { label: "Date of Birth", value: ocr.extracted_dob || dbMatch.matched_citizen?.dob || "Extracted" },
+            { label: "National Registry Match", value: isRegistered ? "✅ REGISTERED (Found in Database)" : (isMismatch ? "⚠️ CONFLICT (Demographic Mismatch)" : "ℹ️ UNREGISTERED (Not in Database)") }
+        ];
+
+        fields.forEach(f => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `<th>${f.label}</th><td>${f.value}</td>`;
+            tbody.appendChild(tr);
+        });
+        ocrSection.style.display = "block";
+
+        // Full Report
+        document.getElementById("reportContent").textContent = data.report || "Inspection complete.";
+
+        // Account Persistence Handling
+        const finalVerdictLabel = isApproved ? "APPROVED" : (isReview ? "REVIEW" : "REJECT");
+        handleScanPersistence(finalVerdictLabel, bioScore, dfScore, tamperFlag, ocrConf, ocr, dbMatch, data.report, data.ela_image_base64);
+
+        // Smooth scroll down to results
+        resultsWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    async function handleScanPersistence(verdict, bioScore, dfScore, tamperFlag, ocrConf, ocr, dbMatch, report, elaB64) {
+        const token = localStorage.getItem("veriByteAccessToken");
+        const guestCallout = document.getElementById("guestCallout");
+        const loggedInCallout = document.getElementById("loggedInCallout");
+
+        const scanPayload = {
+            doc_type: ocr.document_type || "IDENTITY_DOCUMENT",
+            document_name: selectedIdFile ? selectedIdFile.name : "id_document.jpg",
+            verdict: verdict,
+            biometric_score: bioScore,
+            deepfake_score: dfScore,
+            tampering_detected: tamperFlag,
+            ocr_confidence: ocrConf,
+            ocr_data: ocr,
+            database_match: dbMatch,
+            report: report,
+            ela_image_base64: elaB64,
+            timestamp: new Date().toISOString()
+        };
+
+        if (token) {
+            try {
+                const res = await fetch(API_BASE + "/api/scans/save", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + token
+                    },
+                    body: JSON.stringify(scanPayload)
+                });
+                if (res.ok) {
+                    if (guestCallout) guestCallout.style.display = "none";
+                    if (loggedInCallout) loggedInCallout.style.display = "flex";
+                }
+            } catch (err) {
+                console.warn("Scan save error:", err);
+            }
+        } else {
+            sessionStorage.setItem("veriBytePendingScan", JSON.stringify(scanPayload));
+            if (guestCallout) guestCallout.style.display = "flex";
+            if (loggedInCallout) loggedInCallout.style.display = "none";
+        }
+    }
+
+    function saveGuestScanPrompt() {
+        alert("Your scan is safely preserved in this session! Log in or create an account to permanently attach it to your cloud dashboard.");
+        scrollToLogin();
+    }
+
+    function copyAuditReport() {
+        const text = document.getElementById("reportContent").textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("✓ Forensic Audit Report copied to clipboard!");
+        });
+    }
+
+    function downloadAuditReport() {
+        const text = document.getElementById("reportContent").textContent;
+        const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `VeriByte_Forensic_Report_${Date.now()}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+
+
+  /* ================================
+   Veri-Byte Chatbot
+================================ */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const chatbotButton =
+        document.getElementById("chatbotButton");
+
+    const chatbotBox =
+        document.getElementById("chatbotBox");
+
+    const closeChatbot =
+        document.getElementById("closeChatbot");
+
+    const chatbotInput =
+        document.getElementById("chatbotInput");
+
+    const sendChatbotMessage =
+        document.getElementById("sendChatbotMessage");
+
+    const chatbotMessages =
+        document.getElementById("chatbotMessages");
+
+
+    /* OPEN CHATBOT */
+
+    chatbotButton.addEventListener("click", function () {
+
+        chatbotBox.classList.add("active");
+
+        chatbotInput.focus();
+
+    });
+
+
+    /* CLOSE CHATBOT */
+
+    closeChatbot.addEventListener("click", function () {
+
+        chatbotBox.classList.remove("active");
+
+    });
+
+
+    /* ADD MESSAGE */
+
+    function addChatbotMessage(message, type) {
+
+        const messageDiv =
+            document.createElement("div");
+
+        if (type === "user") {
+
+            messageDiv.className =
+                "user-message";
+
+        } else {
+
+            messageDiv.className =
+                "bot-message";
+
+        }
+
+        messageDiv.textContent = message;
+
+        chatbotMessages.appendChild(messageDiv);
+
+        chatbotMessages.scrollTop =
+            chatbotMessages.scrollHeight;
+
+    }
+
+
+    /* BOT RESPONSES */
+
+    function getBotResponse(message) {
+
+        const text =
+            message.toLowerCase().trim();
+
+
+        if (
+            text.includes("hello") ||
+            text.includes("hi") ||
+            text.includes("hey")
+        ) {
+
+            return "Hello! 👋 Welcome to Veri-Byte. How can I help you?";
+
+        }
+
+
+        if (
+            text.includes("what is veri-byte") ||
+            text.includes("what is veribyte") ||
+            text.includes("veri-byte")
+        ) {
+
+            return "Veri-Byte is an AI-driven face verification platform designed to help authenticate identities using face matching, live verification, document processing and security checks.";
+
+        }
+
+
+        if (
+            text.includes("how does it work") ||
+            (
+                text.includes("how") &&
+                text.includes("work")
+            )
+        ) {
+
+            return "The verification process involves uploading a reference image or document, capturing a live face using your camera, comparing the facial information and providing a verification result.";
+
+        }
+
+
+        if (
+            text.includes("document") ||
+            text.includes("aadhaar") ||
+            text.includes("aadhar")
+        ) {
+
+            return "Veri-Byte is designed to support identity information and documents. The verification page can be used to provide the required reference information.";
+
+        }
+
+
+        if (
+            text.includes("verify") ||
+            text.includes("verification")
+        ) {
+
+            return "To start verification, click the 'Verify Now' button on the Veri-Byte homepage.";
+
+        }
+
+
+        if (
+            text.includes("security") ||
+            text.includes("safe") ||
+            text.includes("secure")
+        ) {
+
+            return "Security is a core part of Veri-Byte. The platform is designed around face matching, image-quality checks, liveness detection and controlled processing.";
+
+        }
+
+
+        if (
+            text.includes("feature") ||
+            text.includes("features")
+        ) {
+
+            return "Veri-Byte includes AI face matching, live capture, multiple document formats, anti-spoofing concepts and secure data handling.";
+
+        }
+
+
+        if (
+            text.includes("thank") ||
+            text.includes("thanks")
+        ) {
+
+            return "You're welcome! 😊";
+
+        }
+
+
+        if (
+            text.includes("bye") ||
+            text.includes("goodbye")
+        ) {
+
+            return "Goodbye! 👋 Feel free to ask me anything about Veri-Byte.";
+
+        }
+
+
+        return "I'm still learning! 🤖 You can ask me about Veri-Byte, verification, documents, security, features, or how the system works.";
+
+    }
+
+
+    /* SEND MESSAGE */
+
+    function sendMessage() {
+
+        const message =
+            chatbotInput.value.trim();
+
+
+        if (message === "") {
+
+            return;
+
+        }
+
+
+        addChatbotMessage(
+            message,
+            "user"
+        );
+
+
+        chatbotInput.value = "";
+
+
+        setTimeout(function () {
+
+            const response =
+                getBotResponse(message);
+
+
+            addChatbotMessage(
+                response,
+                "bot"
+            );
+
+        }, 500);
+
+    }
+
+
+    /* SEND BUTTON */
+
+    sendChatbotMessage.addEventListener(
+        "click",
+        sendMessage
+    );
+
+
+    /* ENTER KEY */
+
+    chatbotInput.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+});
+</script>
+<!-- Veri-Byte Chatbot -->
+<div class="chatbot-container">
+
+    <button class="chatbot-button" id="chatbotButton">
+        💬
+    </button>
+
+    <div class="chatbot-box" id="chatbotBox">
+
+        <div class="chatbot-header">
+            <div>
+                <strong>Veri-Byte Assistant</strong>
+                <span>● Online</span>
+            </div>
+
+            <button id="closeChatbot">×</button>
+        </div>
+
+        <div class="chatbot-messages" id="chatbotMessages">
+
+            <div class="bot-message">
+                Hello! 👋 I'm the Veri-Byte Assistant.
+                <br><br>
+                How can I help you?
+            </div>
+
+        </div>
+
+        <div class="chatbot-input-area">
+
+            <input
+                type="text"
+                id="chatbotInput"
+                placeholder="Ask something..."
+                autocomplete="off"
+            >
+
+            <button id="sendChatbotMessage">
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

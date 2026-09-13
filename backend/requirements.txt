@@ -1,0 +1,26 @@
+# ===== OCR (Domestic ID Documents & Passport MRZ) =====
+pytesseract>=0.3.13
+Pillow>=10.0.0
+passporteye>=2.2.2
+
+# ===== Computer Vision & Tampering Detection =====
+opencv-python-headless>=4.8.0,<5.0
+numpy>=1.26.0
+
+# ===== Biometric Verification (InsightFace) =====
+insightface>=0.7.3
+onnxruntime>=1.18.0
+
+# ===== Deepfake / AI-Generated Image Detection =====
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.40.0
+
+# ===== Backend API Server (FastAPI) =====
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+python-multipart>=0.0.9
+
+# ===== Utilities =====
+python-dotenv>=1.0.0
+supabase>=2.0.0

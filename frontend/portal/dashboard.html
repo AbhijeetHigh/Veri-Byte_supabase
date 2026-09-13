@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Veri-Byte | Dashboard</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #fffaf5;
+
+            color: #2b1a12;
+
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+
+            min-height: 100px;
+
+            padding: 15px 4%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    rgba(82, 38, 14, 0.25),
+                    rgba(82, 38, 14, 0.25)
+                ),
+
+                repeating-linear-gradient(
+                    8deg,
+                    #713713 0px,
+                    #8f4a20 4px,
+                    #713713 8px,
+                    #a65b2b 13px
+                );
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,0.2);
+        }
+
+
+        /* =========================
+           BRAND
+        ========================= */
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .flag-image {
+
+            width: 72px;
+
+            height: 48px;
+
+            object-fit: cover;
+
+            border-radius: 2px;
+
+            box-shadow:
+                0 2px 7px
+                rgba(0,0,0,0.25);
+        }
+
+
+        .brand-name {
+
+            font-family:
+                "Trebuchet MS",
+                Arial,
+                sans-serif;
+
+            font-size: 40px;
+
+            letter-spacing: -2px;
+        }
+
+
+        .brand-name span {
+
+            color: #ff9a2e;
+        }
+
+
+        .brand-subtitle {
+
+            font-size: 13px;
+
+            margin-top: 4px;
+
+            color: #9de0ba;
+        }
+
+
+        .brand-subtitle span {
+
+            color: #ffb52e;
+        }
+
+
+        /* =========================
+           LOGOUT BUTTON
+        ========================= */
+
+        .logout-button {
+
+            margin-left: auto;
+
+            padding: 12px 23px;
+
+            border:
+                1px solid #ff951f;
+
+            border-radius: 12px;
+
+            background:
+                rgba(40,15,5,0.35);
+
+            color: white;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .logout-button:hover {
+
+            background: #ed7100;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .page {
+
+            min-height:
+                calc(100vh - 100px);
+
+            padding: 55px 20px;
+
+            background:
+
+                radial-gradient(
+                    circle at 20% 30%,
+                    rgba(255,160,70,0.13),
+                    transparent 30%
+                ),
+
+                #fffaf5;
+        }
+
+
+        .dashboard {
+
+            width:
+                min(1000px, 100%);
+
+            margin: auto;
+        }
+
+
+        /* =========================
+           WELCOME
+        ========================= */
+
+        .welcome-card {
+
+            background: white;
+
+            border:
+                1px solid #f0ddd0;
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 12px 40px
+                rgba(76,35,12,0.08);
+        }
+
+
+        .welcome-card h1 {
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .welcome-card h1 span {
+
+            color: #ed7000;
+        }
+
+
+        .welcome-card p {
+
+            color: #705d51;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           PROFILE CARD
+        ========================= */
+
+        .profile-card {
+
+            background: white;
+
+            border:
+                1px solid #f0ddd0;
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 12px 40px
+                rgba(76,35,12,0.08);
+        }
+
+
+        .profile-card h2 {
+
+            font-size: 22px;
+
+            margin-bottom: 25px;
+
+            color: #2b1a12;
+        }
+
+
+        .profile-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .profile-item {
+
+            padding: 18px;
+
+            background: #fffaf5;
+
+            border:
+                1px solid #f0ddd0;
+
+            border-radius: 12px;
+        }
+
+
+        .profile-item .label {
+
+            display: block;
+
+            font-size: 12px;
+
+            color: #806e63;
+
+            margin-bottom: 7px;
+        }
+
+
+        .profile-item .value {
+
+            display: block;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            color: #2b1a12;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           ACCOUNT STATUS
+        ========================= */
+
+        .status {
+
+            margin-top: 25px;
+
+            padding: 16px;
+
+            border-radius: 12px;
+
+            background: #edf9f1;
+
+            border:
+                1px solid #b8e1c5;
+
+            color: #17652b;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           VERIFY BUTTON
+        ========================= */
+
+        .verify-button {
+
+            display: block;
+
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #f47700,
+                    #ee6300
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .verify-button:hover {
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 7px 18px
+                rgba(237,101,0,0.2);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #29170e;
+
+            color: white;
+
+            padding: 25px 5%;
+        }
+
+
+        .footer {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .footer-logo {
+
+            width: 55px;
+
+            height: 55px;
+
+            border-radius: 8px;
+
+            object-fit: cover;
+
+            background: white;
+        }
+
+
+        .footer-text h3 {
+
+            font-size: 16px;
+        }
+
+
+        .footer-text h3 span {
+
+            color: #f28a16;
+        }
+
+
+        .footer-text p {
+
+            font-size: 12px;
+
+            color: #d2c2b9;
+
+            margin-top: 4px;
+        }
+
+
+        .copyright {
+
+            text-align: center;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            margin-top: 20px;
+
+            padding-top: 15px;
+
+            font-size: 11px;
+
+            color: #bcaea6;
+        }
+
+
+        /* =========================
+           CHATBOT
+        ========================= */
+
+        .chatbot-container {
+
+            position: fixed;
+
+            bottom: 25px;
+
+            right: 25px;
+
+            z-index: 9999;
+
+            font-family: inherit;
+        }
+
+
+        .chatbot-button {
+
+            width: 60px;
+
+            height: 60px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #ff9f43;
+
+            color: #ffffff;
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, 0.3);
+
+            transition: 0.25s ease;
+        }
+
+
+        .chatbot-button:hover {
+
+            transform:
+                scale(1.08);
+        }
+
+
+        .chatbot-box {
+
+            position: absolute;
+
+            right: 0;
+
+            bottom: 75px;
+
+            width: 350px;
+
+            height: 480px;
+
+            background: #171717;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.12);
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 15px 45px
+                rgba(0, 0, 0, 0.45);
+
+            display: none;
+
+            flex-direction: column;
+        }
+
+
+        .chatbot-box.active {
+
+            display: flex;
+        }
+
+
+        .chatbot-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 17px;
+
+            background: #202020;
+
+            color: #ffffff;
+        }
+
+
+        .chatbot-header strong {
+
+            display: block;
+
+            font-size: 15px;
+        }
+
+
+        .chatbot-header span {
+
+            display: block;
+
+            margin-top: 4px;
+
+            font-size: 11px;
+
+            color: #65d68a;
+        }
+
+
+        .chatbot-header button {
+
+            border: none;
+
+            background: transparent;
+
+            color: #ffffff;
+
+            font-size: 25px;
+
+            cursor: pointer;
+        }
+
+
+        .chatbot-messages {
+
+            flex: 1;
+
+            padding: 15px;
+
+            overflow-y: auto;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+
+        .bot-message,
+        .user-message {
+
+            max-width: 80%;
+
+            padding: 11px 14px;
+
+            border-radius: 14px;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        .bot-message {
+
+            align-self: flex-start;
+
+            background: #292929;
+
+            color: #eeeeee;
+
+            border-bottom-left-radius: 4px;
+        }
+
+
+        .user-message {
+
+            align-self: flex-end;
+
+            background: #ff9f43;
+
+            color: #ffffff;
+
+            border-bottom-right-radius: 4px;
+        }
+
+
+        .chatbot-input-area {
+
+            display: flex;
+
+            padding: 12px;
+
+            gap: 8px;
+
+            background: #202020;
+        }
+
+
+        .chatbot-input-area input {
+
+            flex: 1;
+
+            min-width: 0;
+
+            padding: 11px 13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background: #111111;
+
+            color: #ffffff;
+        }
+
+
+        .chatbot-input-area input::placeholder {
+
+            color: #999999;
+        }
+
+
+        .chatbot-input-area button {
+
+            width: 42px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #ff9f43;
+
+            color: #ffffff;
+
+            cursor: pointer;
+
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width: 600px) {
+
+            header {
+
+                padding:
+                    15px 20px;
+
+                flex-wrap: wrap;
+            }
+
+
+            .brand-name {
+
+                font-size: 31px;
+            }
+
+
+            .flag-image {
+
+                width: 58px;
+
+                height: 39px;
+            }
+
+
+            .logout-button {
+
+                width: 100%;
+
+                text-align: center;
+
+                margin-left: 0;
+            }
+
+
+            .page {
+
+                padding:
+                    35px 15px;
+            }
+
+
+            .welcome-card,
+            .profile-card {
+
+                padding: 22px 18px;
+            }
+
+
+            .profile-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            /* CHATBOT MOBILE */
+
+            .chatbot-container {
+
+                right: 15px;
+
+                bottom: 15px;
+            }
+
+
+            .chatbot-box {
+
+                width:
+                    calc(100vw - 30px);
+
+                height: 450px;
+            }
+
+        }
+
+        /* =========================
+           DASHBOARD METRICS & HISTORY
+        ========================= */
+        .dash-kpis {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .dash-kpis {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .dash-kpi-card {
+            background: white;
+            border: 1px solid #f0ddd0;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(76, 35, 12, 0.05);
+            text-align: center;
+        }
+
+        .dash-kpi-num {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ed7000;
+            margin-bottom: 4px;
+        }
+
+        .dash-kpi-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #7a6557;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Scan History Card */
+        .history-card {
+            background: white;
+            border: 1px solid #f0ddd0;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 25px;
+            box-shadow: 0 12px 40px rgba(76, 35, 12, 0.08);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f2e2d6;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .history-header h2 {
+            font-size: 20px;
+            color: #2b1a12;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .history-table th {
+            text-align: left;
+            padding: 12px 14px;
+            color: #8c7365;
+            font-weight: 700;
+            border-bottom: 2px solid #eddcd0;
+            background: #fffaf5;
+        }
+
+        .history-table td {
+            padding: 14px;
+            border-bottom: 1px solid #f4e6dc;
+            color: #2b1a12;
+            vertical-align: middle;
+        }
+
+        .history-table tr:hover {
+            background: #fff8f0;
+        }
+
+        .badge-verdict {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-verdict.PASS {
+            background: #e8f8f0;
+            color: #1e824c;
+            border: 1px solid #a3e4d7;
+        }
+
+        .badge-verdict.REVIEW {
+            background: #fef5e7;
+            color: #d35400;
+            border: 1px solid #fad7a0;
+        }
+
+        .badge-verdict.REJECT {
+            background: #fdedec;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+
+        .badge-reg-pill {
+            display: inline-block;
+            padding: 4px 9px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+
+        .badge-reg-pill.reg-registered {
+            background: #e8f8f0;
+            color: #1e824c;
+            border: 1px solid #a3e4d7;
+        }
+
+        .badge-reg-pill.reg-unregistered {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+        }
+
+        .badge-reg-pill.reg-mismatch {
+            background: #fef5e7;
+            color: #d35400;
+            border: 1px solid #fad7a0;
+        }
+
+        .modal-registry-callout {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .modal-registry-callout.registered {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #15803d;
+        }
+
+        .modal-registry-callout.unregistered {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+        }
+
+        .modal-registry-callout.mismatch {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            color: #b45309;
+        }
+
+        .action-btn-sm {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid #eddcd0;
+            background: white;
+            color: #634b3d;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-right: 6px;
+        }
+
+        .action-btn-sm:hover {
+            border-color: #ed7000;
+            color: #ed7000;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 45px 20px;
+            color: #8a7366;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 10, 5, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #7a6557;
+        }
+
+        .modal-pre {
+            background: #190f09;
+            color: #ffd8b3;
+            padding: 16px;
+            border-radius: 12px;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            max-height: 350px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <div class="brand">
+
+            <img
+                src="INDIAN_FLAG.jpg"
+                alt="Indian Flag"
+                class="flag-image"
+            >
+
+            <div>
+
+                <div class="brand-name">
+
+                    <span>V</span>eri-Byte
+
+                </div>
+
+
+                <div class="brand-subtitle">
+
+                    A Project of
+
+                    <span>
+                        Hexa-Byte
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div style="margin-left: auto; display: flex; align-items: center; gap: 12px;">
+            <a
+                href="index.html"
+                class="logout-button"
+                style="background: transparent; border-color: #ff9a2e; text-decoration: none;"
+            >
+                🏠 Home &amp; Verify
+            </a>
+            <button
+                class="logout-button"
+                onclick="logout()"
+            >
+                🚪 Logout
+            </button>
+        </div>
+
+    </header>
+
+    <!-- =========================
+         MAIN DASHBOARD
+    ========================= -->
+
+    <main class="page">
+
+        <div class="dashboard">
+
+            <!-- WELCOME -->
+            <div class="welcome-card">
+                <h1>
+                    Welcome, <span id="dashboardName">User</span>
+                </h1>
+                <p>
+                    This is your Veri-Byte Identity &amp; Verification Hub.
+                    All identity checks performed under this account are archived in your cloud audit history.
+                </p>
+            </div>
+
+            <!-- DASHBOARD VERIFICATION METRICS -->
+            <div class="dash-kpis">
+                <div class="dash-kpi-card">
+                    <div class="dash-kpi-num" id="statTotalScans">0</div>
+                    <div class="dash-kpi-title">Total Verifications</div>
+                </div>
+                <div class="dash-kpi-card">
+                    <div class="dash-kpi-num" id="statPassed" style="color: #1e824c;">0</div>
+                    <div class="dash-kpi-title">Authenticated (PASS)</div>
+                </div>
+                <div class="dash-kpi-card">
+                    <div class="dash-kpi-num" id="statReview" style="color: #d35400;">0</div>
+                    <div class="dash-kpi-title">Suspicious (REVIEW)</div>
+                </div>
+                <div class="dash-kpi-card">
+                    <div class="dash-kpi-num" id="statRejected" style="color: #c0392b;">0</div>
+                    <div class="dash-kpi-title">Rejected (FRAUD)</div>
+                </div>
+            </div>
+
+            <!-- PROFILE -->
+            <div class="profile-card">
+                <h2>
+                    <span>👤</span> Personal Information
+                </h2>
+
+                <div class="profile-grid">
+                    <!-- NAME -->
+                    <div class="profile-item">
+                        <span class="label">
+                            Full Name
+                        </span>
+                        <span class="value" id="profileName">
+                            —
+                        </span>
+                    </div>
+
+                    <!-- PHONE -->
+                    <div class="profile-item">
+                        <span class="label">
+                            Phone Number
+                        </span>
+                        <span class="value" id="profilePhone">
+                            —
+                        </span>
+                    </div>
+
+                    <!-- EMAIL -->
+                    <div class="profile-item">
+                        <span class="label">
+                            Email Address
+                        </span>
+                        <span class="value" id="profileEmail">
+                            —
+                        </span>
+                    </div>
+
+                    <!-- AADHAAR -->
+                    <div class="profile-item">
+                        <span class="label">
+                            Aadhaar ID
+                        </span>
+                        <span class="value" id="profileAadhaar">
+                            —
+                        </span>
+                    </div>
+                </div>
+
+                <!-- STATUS -->
+                <div class="status">
+                    ✓ Account Active &amp; Verified (Supabase Cloud)
+                </div>
+
+                <!-- VERIFY -->
+                <button
+                    class="verify-button"
+                    onclick="startVerification()"
+                >
+                    ⚡ Launch New Verification Scan →
+                </button>
+            </div>
+
+            <!-- SCAN HISTORY CARD -->
+            <div class="history-card" id="scanHistorySection">
+                <div class="history-header">
+                    <h2>
+                        <span>📁</span> Saved Verification Scan History
+                    </h2>
+                    <button class="action-btn-sm" onclick="fetchScanHistory()">↺ Refresh Scans</button>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="history-table" id="scansTable">
+                        <thead>
+                            <tr>
+                                <th>Scan ID</th>
+                                <th>Date &amp; Time</th>
+                                <th>Document</th>
+                                <th>Verdict</th>
+                                <th>Biometric Match</th>
+                                <th>Deepfake Risk</th>
+                                <th>Tampering</th>
+                                <th>National Registry</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scansTableBody">
+                            <tr>
+                                <td colspan="9" class="empty-history">Loading verification scan history...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- AUDIT REPORT INSPECTION MODAL -->
+    <div class="modal" id="reportModal">
+        <div class="modal-content">
+            <button type="button" class="modal-close" onclick="closeReportModal()">×</button>
+            <h2 id="modalTitle" style="color:#2b1a12; font-size:22px; margin-bottom:8px;">Forensic Audit Record</h2>
+            <div id="modalMeta" style="color:#7a6557; font-size:13px; margin-bottom:15px;"></div>
+            <div id="modalRegistryWrap"></div>
+            
+            <div id="modalElaWrap" style="display:none; margin-bottom:15px; text-align:center; background:#111; padding:12px; border-radius:12px;">
+                <img id="modalElaImg" style="max-height:220px; max-width:100%; object-fit:contain;" alt="ELA Heatmap">
+                <div style="color:#ffd8b3; font-size:12px; margin-top:4px;">Error Level Analysis (ELA) Compression Signature</div>
+            </div>
+
+            <pre class="modal-pre" id="modalReportContent"></pre>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                <button type="button" class="action-btn-sm" onclick="downloadCurrentModalReport()">📥 Download Audit Report</button>
+                <button type="button" class="action-btn-sm" style="background:#ed7000; color:white; border-color:#ed7000;" onclick="closeReportModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div class="footer">
+
+            <img
+                src="hexabyte.png"
+                alt="Hexa-Byte Logo"
+                class="footer-logo"
+            >
+
+
+            <div class="footer-text">
+
+                <h3>
+
+                    A Project of
+
+                    <span>
+                        Hexa-Byte
+                    </span>
+
+                </h3>
+
+
+                <p>
+
+                    Innovating for a
+                    Secure Tomorrow.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 Veri-Byte.
+            A Project of Hexa-Byte.
+            All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================
+         CHATBOT
+    ========================= -->
+
+    <div class="chatbot-container">
+
+        <button
+            class="chatbot-button"
+            id="chatbotButton"
+            type="button"
+        >
+
+            💬
+
+        </button>
+
+
+        <div
+            class="chatbot-box"
+            id="chatbotBox"
+        >
+
+            <div class="chatbot-header">
+
+                <div>
+
+                    <strong>
+                        Veri-Byte Assistant
+                    </strong>
+
+                    <span>
+                        ● Online
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="closeChatbot"
+                >
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="chatbot-messages"
+                id="chatbotMessages"
+            >
+
+                <div class="bot-message">
+
+                    Hello! 👋 I'm the
+                    Veri-Byte Assistant.
+                    How can I help you with
+                    your dashboard?
+
+                </div>
+
+            </div>
+
+
+            <div class="chatbot-input-area">
+
+                <input
+                    type="text"
+                    id="chatbotInput"
+                    placeholder="Type your message..."
+                    autocomplete="off"
+                >
+
+
+                <button
+                    type="button"
+                    id="sendChatbotMessage"
+                >
+
+                    ➤
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        /* =========================
+           DASHBOARD CONTROLLER & SCAN HISTORY
+        ========================= */
+        const API_BASE = window.location.origin.includes(":8000") ? "" : "http://127.0.0.1:8000";
+        let userScansCache = [];
+        let currentViewingScan = null;
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            const token = localStorage.getItem("veriByteAccessToken");
+            if (!token) {
+                window.location.href = "index.html#loginCard";
+                return;
+            }
+
+            try {
+                const response = await fetch(API_BASE + "/me", {
+                    headers: { "Authorization": "Bearer " + token }
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.detail || "Session expired");
+
+                document.getElementById("dashboardName").textContent = data.name || "User";
+                document.getElementById("profileName").textContent = data.name || "—";
+                document.getElementById("profilePhone").textContent = data.phone || "—";
+                document.getElementById("profileEmail").textContent = data.email || "—";
+                document.getElementById("profileAadhaar").textContent = maskAadhaar(data.aadhaar);
+
+                // Fetch stored scan history
+                fetchScanHistory();
+
+            } catch (error) {
+                localStorage.removeItem("veriByteAccessToken");
+                localStorage.removeItem("veriByteRefreshToken");
+                alert("Your login session is no longer valid. Please login again.");
+                window.location.href = "index.html#loginCard";
+            }
+        });
+
+        async function fetchScanHistory() {
+            const token = localStorage.getItem("veriByteAccessToken");
+            if (!token) return;
+
+            const tbody = document.getElementById("scansTableBody");
+            try {
+                const res = await fetch(API_BASE + "/api/scans/history", {
+                    headers: { "Authorization": "Bearer " + token }
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.detail || "Failed to fetch scan history");
+
+                userScansCache = data.scans || [];
+
+                // Update Metrics Counters
+                const total = userScansCache.length;
+                const passed = userScansCache.filter(s => s.verdict === "PASS").length;
+                const review = userScansCache.filter(s => s.verdict === "REVIEW").length;
+                const rejected = userScansCache.filter(s => s.verdict === "REJECT").length;
+
+                document.getElementById("statTotalScans").textContent = total;
+                document.getElementById("statPassed").textContent = passed;
+                document.getElementById("statReview").textContent = review;
+                document.getElementById("statRejected").textContent = rejected;
+
+                // Render Table
+                if (userScansCache.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="9" class="empty-history">
+                                <div style="font-size:32px; margin-bottom:8px;">📁</div>
+                                <strong>No verification scans found in your cloud history.</strong><br>
+                                <span style="font-size:13px; color:#8c7365;">Run your first identity screening test to view real-time forensic reports here.</span>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                tbody.innerHTML = "";
+                userScansCache.forEach(scan => {
+                    const tr = document.createElement("tr");
+
+                    const verdict = scan.verdict || "UNKNOWN";
+                    const bio = scan.biometric_score ? scan.biometric_score.toFixed(1) + "%" : "N/A";
+                    const df = scan.deepfake_score ? scan.deepfake_score.toFixed(1) + "%" : "0.0%";
+                    const tamper = scan.tampering_detected ? "⚠️ Tampered" : "✅ Clean";
+
+                    const db = scan.database_match || (scan.ocr_data && scan.ocr_data.database_verification) || {};
+                    const isReg = db.status === "VERIFIED_MATCH" || (db.record_found && db.status !== "DEMOGRAPHIC_MISMATCH");
+                    const isMis = db.status === "DEMOGRAPHIC_MISMATCH";
+                    const regLabel = isReg ? "REGISTERED" : (isMis ? "MISMATCH" : "UNREGISTERED");
+                    const regClass = isReg ? "badge-reg-pill reg-registered" : (isMis ? "badge-reg-pill reg-mismatch" : "badge-reg-pill reg-unregistered");
+
+                    tr.innerHTML = `
+                        <td><strong>${scan.id || "SCAN"}</strong></td>
+                        <td>${formatDate(scan.timestamp)}</td>
+                        <td>${scan.doc_type || "DOCUMENT"} <br><span style="font-size:11px; color:#888;">${scan.document_name || ""}</span></td>
+                        <td><span class="badge-verdict ${verdict}">${verdict}</span></td>
+                        <td>${bio}</td>
+                        <td>${df}</td>
+                        <td>${tamper}</td>
+                        <td><span class="${regClass}">${regLabel}</span></td>
+                        <td>
+                            <button class="action-btn-sm" onclick="openReportModal('${scan.id}')">👁️ View</button>
+                            <button class="action-btn-sm" onclick="downloadScanReport('${scan.id}')">📥 Download</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+            } catch (err) {
+                tbody.innerHTML = `<tr><td colspan="9" class="empty-history" style="color:#c0392b;">Error loading scans: ${err.message}</td></tr>`;
+            }
+        }
+
+        function formatDate(isoStr) {
+            if (!isoStr) return "Recent";
+            try {
+                const d = new Date(isoStr);
+                return d.toLocaleDateString() + " " + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            } catch {
+                return isoStr;
+            }
+        }
+
+        function maskAadhaar(aadhaar) {
+            if (!aadhaar) return "—";
+            if (aadhaar.length !== 12) return "********";
+            return "XXXX XXXX " + aadhaar.slice(-4);
+        }
+
+        function logout() {
+            localStorage.removeItem("veriByteAccessToken");
+            localStorage.removeItem("veriByteRefreshToken");
+            window.location.href = "index.html";
+        }
+
+        function startVerification() {
+            window.location.href = "index.html#verifySection";
+        }
+
+        // Modal Controls
+        function openReportModal(scanId) {
+            const scan = userScansCache.find(s => s.id === scanId);
+            if (!scan) return;
+            currentViewingScan = scan;
+
+            document.getElementById("modalTitle").textContent = `Forensic Audit Log — ${scan.id}`;
+            document.getElementById("modalMeta").innerHTML = `
+                <strong>Date:</strong> ${formatDate(scan.timestamp)} &nbsp;|&nbsp;
+                <strong>Document:</strong> ${scan.doc_type} (${scan.document_name}) &nbsp;|&nbsp;
+                <strong>Verdict:</strong> <span class="badge-verdict ${scan.verdict}">${scan.verdict}</span>
+            `;
+
+            const db = scan.database_match || (scan.ocr_data && scan.ocr_data.database_verification) || {};
+            const isReg = db.status === "VERIFIED_MATCH" || (db.record_found && db.status !== "DEMOGRAPHIC_MISMATCH");
+            const isMis = db.status === "DEMOGRAPHIC_MISMATCH";
+            const regWrap = document.getElementById("modalRegistryWrap");
+            if (regWrap) {
+                if (isReg) {
+                    const cit = db.matched_citizen || {};
+                    regWrap.innerHTML = `
+                        <div class="modal-registry-callout registered">
+                            <strong>✅ National Registry Status: REGISTERED (Found in Database)</strong>
+                            <p style="margin:4px 0 0 0;">Official citizen record confirmed in National Identity Reference Database (${cit.name || "Verified Citizen"}). Document identity cross-check passed.</p>
+                        </div>
+                    `;
+                } else if (isMis) {
+                    regWrap.innerHTML = `
+                        <div class="modal-registry-callout mismatch">
+                            <strong>⚠️ National Registry Status: REGISTERED (DEMOGRAPHIC CONFLICT)</strong>
+                            <p style="margin:4px 0 0 0;">ID exists in database, but demographic information on document conflicts with government records.</p>
+                        </div>
+                    `;
+                } else {
+                    regWrap.innerHTML = `
+                        <div class="modal-registry-callout unregistered">
+                            <strong>ℹ️ National Registry Status: UNREGISTERED (Not in Database)</strong>
+                            <p style="margin:4px 0 0 0;">"UNREGISTERED" means this document was not found in our reference database. Authenticity was screened through AI tampering, deepfake, and checksum tests.</p>
+                        </div>
+                    `;
+                }
+            }
+
+            const elaWrap = document.getElementById("modalElaWrap");
+            const elaImg = document.getElementById("modalElaImg");
+            if (scan.ela_image_base64) {
+                elaImg.src = scan.ela_image_base64;
+                elaWrap.style.display = "block";
+            } else {
+                elaWrap.style.display = "none";
+            }
+
+            document.getElementById("modalReportContent").textContent = scan.report || "No text report stored for this scan.";
+            document.getElementById("reportModal").classList.add("active");
+        }
+
+        function closeReportModal() {
+            document.getElementById("reportModal").classList.remove("active");
+            currentViewingScan = null;
+        }
+
+        function downloadCurrentModalReport() {
+            if (!currentViewingScan) return;
+            downloadReportContent(currentViewingScan.id, currentViewingScan.report);
+        }
+
+        function downloadScanReport(scanId) {
+            const scan = userScansCache.find(s => s.id === scanId);
+            if (!scan) return;
+            downloadReportContent(scan.id, scan.report);
+        }
+
+        function downloadReportContent(id, text) {
+            const blob = new Blob([text || "No report available."], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `VeriByte_Audit_${id}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+
+
+
+        /* =========================
+           VERI-BYTE CHATBOT
+        ========================= */
+
+        /*
+            DOMContentLoaded is used so
+            the chatbot HTML exists before
+            JavaScript tries to access it.
+        */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                const chatbotButton =
+                    document.getElementById(
+                        "chatbotButton"
+                    );
+
+
+                const chatbotBox =
+                    document.getElementById(
+                        "chatbotBox"
+                    );
+
+
+                const closeChatbot =
+                    document.getElementById(
+                        "closeChatbot"
+                    );
+
+
+                const chatbotInput =
+                    document.getElementById(
+                        "chatbotInput"
+                    );
+
+
+                const sendChatbotMessage =
+                    document.getElementById(
+                        "sendChatbotMessage"
+                    );
+
+
+                const chatbotMessages =
+                    document.getElementById(
+                        "chatbotMessages"
+                    );
+
+
+
+                /* OPEN CHATBOT */
+
+                chatbotButton.addEventListener(
+                    "click",
+                    function () {
+
+                        chatbotBox.classList.add(
+                            "active"
+                        );
+
+                        chatbotInput.focus();
+
+                    }
+                );
+
+
+
+                /* CLOSE CHATBOT */
+
+                closeChatbot.addEventListener(
+                    "click",
+                    function () {
+
+                        chatbotBox.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+
+                /* ADD MESSAGE */
+
+                function addMessage(
+                    text,
+                    type
+                ) {
+
+                    const message =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    if (type === "user") {
+
+                        message.className =
+                            "user-message";
+
+                    } else {
+
+                        message.className =
+                            "bot-message";
+
+                    }
+
+
+                    message.textContent =
+                        text;
+
+
+                    chatbotMessages.appendChild(
+                        message
+                    );
+
+
+                    chatbotMessages.scrollTop =
+                        chatbotMessages.scrollHeight;
+
+                }
+
+
+
+                /* BOT RESPONSE */
+
+                function getBotResponse(
+                    message
+                ) {
+
+                    const text =
+                        message
+                            .toLowerCase()
+                            .trim();
+
+
+
+                    if (
+                        text.includes("hello") ||
+                        text.includes("hi") ||
+                        text.includes("hey")
+                    ) {
+
+                        return (
+                            "Hello! 👋 How can I help you with Veri-Byte?"
+                        );
+
+                    }
+
+
+
+                    if (
+                        text.includes("dashboard") ||
+                        text.includes("profile")
+                    ) {
+
+                        return (
+                            "This dashboard displays your registered Veri-Byte account information."
+                        );
+
+                    }
+
+
+
+                    if (
+                        text.includes("account") ||
+                        text.includes("register")
+                    ) {
+
+                        return (
+                            "Your account has been registered successfully. Your profile information is shown on this dashboard."
+                        );
+
+                    }
+
+
+
+                    if (
+                        text.includes("aadhaar") ||
+                        text.includes("aadhar")
+                    ) {
+
+                        return (
+                            "Your Aadhaar ID is displayed in masked form for better privacy."
+                        );
+
+                    }
+
+
+
+                    if (
+                        text.includes("password")
+                    ) {
+
+                        return (
+                            "For security, your password is not displayed on the dashboard."
+                        );
+
+                    }
+
+
+
+                    if (
+                        text.includes("login")
+                    ) {
+
+                        return (
+                            "You can return to the Veri-Byte login page using the Logout button and then logging in again."
+                        );
+
+                    }
+
+
+
+                    if (
+                        text.includes("verify") ||
+                        text.includes("verification")
+                    ) {
+
+                        return (
+                            "Click the 'Verify My Identity' button to start the identity verification process."
+                        );
+
+                    }
+
+
+
+                    if (
+                        text.includes("veri-byte") ||
+                        text.includes("veribyte")
+                    ) {
+
+                        return (
+                            "Veri-Byte is an identity verification project by Hexa-Byte."
+                        );
+
+                    }
+
+
+
+                    if (
+                        text.includes("thank")
+                    ) {
+
+                        return (
+                            "You're welcome! 😊"
+                        );
+
+                    }
+
+
+
+                    if (
+                        text.includes("bye")
+                    ) {
+
+                        return (
+                            "Goodbye! 👋 Feel free to come back if you need help."
+                        );
+
+                    }
+
+
+
+                    return (
+                        "I'm still learning! 🤖 You can ask me about your dashboard, account, Aadhaar, verification, login, or Veri-Byte."
+                    );
+
+                }
+
+
+
+                /* SEND MESSAGE */
+
+                function sendMessage() {
+
+                    const text =
+                        chatbotInput.value.trim();
+
+
+                    if (text === "") {
+
+                        return;
+
+                    }
+
+
+                    /* USER MESSAGE */
+
+                    addMessage(
+                        text,
+                        "user"
+                    );
+
+
+                    chatbotInput.value = "";
+
+
+
+                    /* BOT RESPONSE */
+
+                    setTimeout(
+                        function () {
+
+                            const response =
+                                getBotResponse(
+                                    text
+                                );
+
+
+                            addMessage(
+                                response,
+                                "bot"
+                            );
+
+                        },
+                        500
+                    );
+
+                }
+
+
+
+                /* SEND BUTTON */
+
+                sendChatbotMessage.addEventListener(
+                    "click",
+                    sendMessage
+                );
+
+
+
+                /* ENTER KEY */
+
+                chatbotInput.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (
+                            event.key === "Enter"
+                        ) {
+
+                            event.preventDefault();
+
+                            sendMessage();
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

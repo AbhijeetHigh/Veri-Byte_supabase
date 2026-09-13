@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Veri-Byte | Create Account</title>
+
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #fffaf5;
+
+            color: #2b1a12;
+
+            min-height: 100vh;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+
+            min-height: 100px;
+
+            padding: 15px 4%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+
+            color: white;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+
+            background:
+
+                linear-gradient(
+                    rgba(82, 38, 14, 0.25),
+                    rgba(82, 38, 14, 0.25)
+                ),
+
+                repeating-linear-gradient(
+                    8deg,
+                    #713713 0px,
+                    #8f4a20 4px,
+                    #713713 8px,
+                    #a65b2b 13px
+                );
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,0.2);
+        }
+
+
+        /* =========================
+           BRAND
+        ========================= */
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .flag-image {
+
+            width: 72px;
+
+            height: 48px;
+
+            object-fit: cover;
+
+            border-radius: 2px;
+
+            box-shadow:
+                0 2px 7px
+                rgba(0,0,0,0.25);
+        }
+
+
+        .brand-name {
+
+            font-family:
+                "Trebuchet MS",
+                Arial,
+                sans-serif;
+
+            font-size: 40px;
+
+            letter-spacing: -2px;
+        }
+
+
+        .brand-name span {
+
+            color: #ff9a2e;
+        }
+
+
+        .brand-subtitle {
+
+            font-size: 13px;
+
+            margin-top: 4px;
+
+            color: #9de0ba;
+        }
+
+
+        .brand-subtitle span {
+
+            color: #ffb52e;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-button {
+
+            margin-left: auto;
+
+            padding: 12px 23px;
+
+            border:
+                1px solid #ff951f;
+
+            border-radius: 12px;
+
+            background:
+                rgba(40,15,5,0.35);
+
+            color: white;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .back-button:hover {
+
+            background: #ed7100;
+        }
+
+
+        /* =========================
+           MAIN PAGE
+        ========================= */
+
+        .page {
+
+            min-height:
+                calc(100vh - 100px);
+
+            padding: 60px 20px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+
+                radial-gradient(
+                    circle at 20% 30%,
+                    rgba(255,160,70,0.13),
+                    transparent 30%
+                ),
+
+                #fffaf5;
+        }
+
+
+        /* =========================
+           REGISTER CARD
+        ========================= */
+
+        .register-card {
+
+            width:
+                min(560px, 100%);
+
+            background: white;
+
+            border:
+                1px solid #f0ddd0;
+
+            border-radius: 20px;
+
+            padding: 38px;
+
+            box-shadow:
+                0 12px 40px
+                rgba(76,35,12,0.10);
+        }
+
+
+        .register-card h1 {
+
+            text-align: center;
+
+            font-size: 29px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .register-card h1 span {
+
+            color: #ed7000;
+        }
+
+
+        .description {
+
+            text-align: center;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            color: #705d51;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           INPUT BOX
+        ========================= */
+
+        .input-box {
+
+            position: relative;
+
+            margin-bottom: 17px;
+        }
+
+
+        .input-box input {
+
+            width: 100%;
+
+            padding:
+                15px
+                15px
+                15px
+                45px;
+
+            border:
+                1px solid #e5d3c7;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            background: #fffdfb;
+
+            transition: 0.2s;
+        }
+
+
+        .input-box input:focus {
+
+            border-color: #ed7000;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(237,112,0,0.08);
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 13px;
+
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           AADHAAR INFORMATION
+        ========================= */
+
+        .aadhaar-note {
+
+            font-size: 12px;
+
+            color: #806e63;
+
+            line-height: 1.5;
+
+            margin-top: -7px;
+
+            margin-bottom: 16px;
+        }
+
+
+        /* =========================
+           PASSWORD INFORMATION
+        ========================= */
+
+        .password-note {
+
+            font-size: 12px;
+
+            color: #806e63;
+
+            margin-top: -7px;
+
+            margin-bottom: 16px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           TERMS
+        ========================= */
+
+        .terms {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 9px;
+
+            font-size: 13px;
+
+            color: #705d51;
+
+            line-height: 1.5;
+
+            margin:
+                7px 0 20px;
+        }
+
+
+        .terms input {
+
+            margin-top: 3px;
+        }
+
+
+        /* =========================
+           REGISTER BUTTON
+        ========================= */
+
+        .register-button {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #f47700,
+                    #ee6300
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .register-button:hover {
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 7px 18px
+                rgba(237,101,0,0.2);
+        }
+
+
+        /* =========================
+           LOGIN LINK
+        ========================= */
+
+        .login-link {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            font-size: 14px;
+
+            color: #705d51;
+        }
+
+
+        .login-link a {
+
+            color: #e96800;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           STATUS MESSAGE
+        ========================= */
+
+        .message {
+
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        .message.success {
+
+            display: block;
+
+            background: #edf9f1;
+
+            border:
+                1px solid #b8e1c5;
+
+            color: #17652b;
+        }
+
+
+        .message.error {
+
+            display: block;
+
+            background: #fff0ec;
+
+            border:
+                1px solid #efc0b5;
+
+            color: #9b2c18;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #29170e;
+
+            color: white;
+
+            padding:
+                25px 5%;
+        }
+
+
+        .footer {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .footer-logo {
+
+            width: 55px;
+
+            height: 55px;
+
+            border-radius: 8px;
+
+            object-fit: cover;
+
+            background: white;
+        }
+
+
+        .footer-text h3 {
+
+            font-size: 16px;
+        }
+
+
+        .footer-text h3 span {
+
+            color: #f28a16;
+        }
+
+
+        .footer-text p {
+
+            font-size: 12px;
+
+            color: #d2c2b9;
+
+            margin-top: 4px;
+        }
+
+
+        .copyright {
+
+            text-align: center;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            margin-top: 20px;
+
+            padding-top: 15px;
+
+            font-size: 11px;
+
+            color: #bcaea6;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width:600px) {
+
+            header {
+
+                padding:
+                    15px 20px;
+
+                flex-wrap: wrap;
+            }
+
+
+            .brand-name {
+
+                font-size: 31px;
+            }
+
+
+            .flag-image {
+
+                width: 58px;
+
+                height: 39px;
+            }
+
+
+            .back-button {
+
+                width: 100%;
+
+                text-align: center;
+
+                margin-left: 0;
+            }
+
+
+            .page {
+
+                padding:
+                    35px 15px;
+            }
+
+
+            .register-card {
+
+                padding: 25px 20px;
+            }
+
+
+            .register-card h1 {
+
+                font-size: 25px;
+            }
+        }
+	/* =========================
+   CHATBOT
+========================= */
+
+.chatbot-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+    font-family: inherit;
+}
+
+.chatbot-button {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background: #ff9f43;
+    color: #ffffff;
+    font-size: 25px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: 0.25s ease;
+}
+
+.chatbot-button:hover {
+    transform: scale(1.08);
+}
+
+.chatbot-box {
+    position: absolute;
+    right: 0;
+    bottom: 75px;
+    width: 350px;
+    height: 480px;
+    background: #171717;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
+    display: none;
+    flex-direction: column;
+}
+
+.chatbot-box.active {
+    display: flex;
+}
+
+.chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px;
+    background: #202020;
+    color: #ffffff;
+}
+
+.chatbot-header strong {
+    display: block;
+    font-size: 15px;
+}
+
+.chatbot-header span {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    color: #65d68a;
+}
+
+.chatbot-header button {
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.chatbot-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bot-message,
+.user-message {
+    max-width: 80%;
+    padding: 11px 14px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background: #292929;
+    color: #eeeeee;
+    border-bottom-left-radius: 4px;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: #ff9f43;
+    color: #ffffff;
+    border-bottom-right-radius: 4px;
+}
+
+.chatbot-input-area {
+    display: flex;
+    padding: 12px;
+    gap: 8px;
+    background: #202020;
+}
+
+.chatbot-input-area input {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 13px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    outline: none;
+    background: #111111;
+    color: #ffffff;
+}
+
+.chatbot-input-area input::placeholder {
+    color: #999999;
+}
+
+.chatbot-input-area button {
+    width: 42px;
+    border: none;
+    border-radius: 10px;
+    background: #ff9f43;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+@media(max-width:500px) {
+
+    .chatbot-container {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .chatbot-box {
+        width: calc(100vw - 30px);
+        height: 450px;
+    }
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+
+        <div class="brand">
+
+
+            <img
+                src="INDIAN_FLAG.jpg"
+                alt="Indian Flag"
+                class="flag-image"
+            >
+
+
+            <div>
+
+
+                <div class="brand-name">
+
+                    <span>V</span>eri-Byte
+
+                </div>
+
+
+                <div class="brand-subtitle">
+
+                    A Project of
+
+                    <span>
+                        Hexa-Byte
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <a
+            href="index.html"
+            class="back-button"
+        >
+
+            ← Back to Home
+
+        </a>
+
+
+    </header>
+
+
+
+    <!-- =========================
+         REGISTRATION PAGE
+    ========================= -->
+
+    <main class="page">
+
+
+        <div class="register-card">
+
+
+            <h1>
+
+                Create your
+
+                <span>
+                    Veri-Byte
+                </span>
+
+                account
+
+            </h1>
+
+
+            <p class="description">
+
+                Register your identity securely
+                to use the Veri-Byte verification
+                system.
+
+            </p>
+
+
+
+            <form
+                id="registrationForm"
+                onsubmit="createAccount(event)"
+            >
+
+
+                <!-- NAME -->
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        👤
+                    </span>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Full Name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PHONE -->
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        📱
+                    </span>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Phone Number"
+                        inputmode="numeric"
+                        maxlength="10"
+                        pattern="[6-9][0-9]{9}"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        ✉️
+                    </span>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Email Address"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- AADHAAR -->
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        🪪
+                    </span>
+
+                    <!-- =========================
+     AADHAAR NUMBER
+========================= -->
+
+<div class="input-box">
+
+    <span class="input-icon">
+        🪪
+    </span>
+
+    <input
+        type="text"
+        id="aadhaar"
+        placeholder="12-Digit Aadhaar ID"
+        inputmode="numeric"
+        maxlength="14"
+        autocomplete="off"
+    >
+
+</div>
+
+
+<p class="aadhaar-note">
+
+    Enter your 12-digit Aadhaar number
+    or upload an image of your Aadhaar.
+
+</p>
+
+
+<!-- =========================
+     AADHAAR IMAGE
+========================= -->
+
+<div class="aadhaar-upload">
+
+    <label
+        for="aadhaarImage"
+        class="upload-label"
+    >
+
+        📷
+
+        <span>
+            Upload Aadhaar Image
+        </span>
+
+        <small>
+            JPG, JPEG or PNG
+        </small>
+
+    </label>
+
+
+   <div class="form-group">
+    <label for="aadhaarImage">Aadhaar Image</label>
+
+    <input
+        type="file"
+        id="aadhaarImage"
+        accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+    >
+
+    <div id="imagePreviewContainer" class="image-preview-container" style="display: none;">
+        <img id="aadhaarPreview" class="aadhaar-preview" alt="Aadhaar Preview">
+
+        <button type="button" id="removeImage" class="remove-image">
+            Remove Image
+        </button>
+    </div>
+</div>
+
+    </div>
+
+</div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create Password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+
+                </div>
+
+
+                <p class="password-note">
+
+                    Password must contain at least
+                    8 characters.
+
+                </p>
+
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        🔐
+                    </span>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm Password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- TERMS -->
+
+                <label class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        required
+                    >
+
+                    <span>
+
+                        I agree to the Veri-Byte
+                        Terms & Conditions and understand
+                        that identity verification may be
+                        required during verification.
+
+                    </span>
+
+                </label>
+
+
+
+                <!-- CREATE ACCOUNT -->
+
+                <button
+                    type="submit"
+                    class="register-button"
+                >
+
+                    Create Account
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- STATUS -->
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+
+
+            <!-- LOGIN -->
+
+            <div class="login-link">
+
+                Already have an account?
+
+                <a href="index.html#loginCard">
+
+                    Login
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+
+        <div class="footer">
+
+
+            <img
+                src="hexabyte.png"
+                alt="Hexa-Byte Logo"
+                class="footer-logo"
+            >
+
+
+            <div class="footer-text">
+
+                <h3>
+
+                    A Project of
+
+                    <span>
+                        Hexa-Byte
+                    </span>
+
+                </h3>
+
+
+                <p>
+
+                    Innovating for a
+                    Secure Tomorrow.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 Veri-Byte.
+            A Project of Hexa-Byte.
+            All rights reserved.
+
+        </div>
+
+
+    </footer>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        /* =========================
+           AADHAAR CHECKSUM
+        ========================= */
+
+        function isValidAadhaar(number) {
+
+            /*
+                This performs a Verhoeff checksum
+                validation for a 12-digit Aadhaar
+                number.
+
+                It checks whether the number is
+                structurally valid.
+
+                It does NOT verify whether the
+                Aadhaar belongs to the person.
+            */
+
+
+            if (!/^[0-9]{12}$/.test(number)) {
+
+                return false;
+
+            }
+
+
+            /*
+                Reject obviously repeated numbers.
+            */
+
+            if (/^(\d)\1{11}$/.test(number)) {
+
+                return false;
+
+            }
+
+
+            const multiplicationTable = [
+
+                [0,1,2,3,4,5,6,7,8,9],
+                [1,2,3,4,0,6,7,8,9,5],
+                [2,3,4,0,1,7,8,9,5,6],
+                [3,4,0,1,2,8,9,5,6,7],
+                [4,0,1,2,3,9,5,6,7,8],
+                [5,9,8,7,6,0,4,3,2,1],
+                [6,5,9,8,7,1,0,4,3,2],
+                [7,6,5,9,8,2,1,0,4,3],
+                [8,7,6,5,9,3,2,1,0,4],
+                [9,8,7,6,5,4,3,2,1,0]
+
+            ];
+
+
+            const permutationTable = [
+
+                [0,1,2,3,4,5,6,7,8,9],
+                [1,5,7,6,2,8,3,0,9,4],
+                [5,8,0,3,7,9,6,1,4,2],
+                [8,9,1,6,0,4,3,5,2,7],
+                [9,4,5,3,1,2,6,8,7,0],
+                [4,2,8,6,5,7,3,9,0,1],
+                [2,7,9,3,8,0,6,5,1,4],
+                [7,0,4,6,9,1,3,2,8,5]
+
+            ];
+
+
+            const inverseTable = [
+
+                0,4,3,2,1,5,6,7,8,9
+
+            ];
+
+
+            let checksum = 0;
+
+            const digits =
+                number
+                    .split("")
+                    .map(Number);
+
+
+            for (
+                let i = 0;
+                i < digits.length;
+                i++
+            ) {
+
+                const position =
+                    (digits.length - 1 - i) % 8;
+
+                checksum =
+                    multiplicationTable[
+                        checksum
+                    ][
+                        permutationTable[position][digits[i]]
+                    ];
+
+            }
+
+
+            return checksum === 0;
+
+        }
+
+
+
+        /* =========================
+           FORMAT AADHAAR
+        ========================= */
+
+        document
+            .getElementById("aadhaar")
+            .addEventListener(
+                "input",
+                function() {
+
+                    let value =
+                        this.value
+                            .replace(/\D/g, "")
+                            .slice(0, 12);
+
+
+                    if (value.length > 8) {
+
+                        value =
+                            value.slice(0,4)
+                            + " "
+                            + value.slice(4,8)
+                            + " "
+                            + value.slice(8);
+
+                    }
+
+                    else if (value.length > 4) {
+
+                        value =
+                            value.slice(0,4)
+                            + " "
+                            + value.slice(4);
+
+                    }
+
+
+                    this.value = value;
+
+                }
+            );
+
+
+
+        /* =========================
+           PHONE VALIDATION
+        ========================= */
+
+        document
+            .getElementById("phone")
+            .addEventListener(
+                "input",
+                function() {
+
+                    this.value =
+                        this.value
+                            .replace(/\D/g, "")
+                            .slice(0,10);
+
+                }
+            );
+
+
+
+        /* =========================
+           CREATE ACCOUNT
+        ========================= */
+
+        const API_BASE = window.location.origin.includes(":8000") ? "" : "http://127.0.0.1:8000";
+
+        async function createAccount(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("fullName").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const aadhaar = document.getElementById("aadhaar").value.replace(/\s/g, "");
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const image = document.getElementById("aadhaarImage").files[0];
+
+            if (name.length < 2) return showMessage("Please enter a valid full name.", "error");
+            if (!/^[6-9][0-9]{9}$/.test(phone)) return showMessage("Please enter a valid 10-digit Indian mobile number.", "error");
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showMessage("Please enter a valid email address.", "error");
+            if (aadhaar && !/^[0-9]{12}$/.test(aadhaar)) return showMessage("Please enter a valid 12-digit Aadhaar number.", "error");
+            if (password.length < 8) return showMessage("Password must contain at least 8 characters.", "error");
+            if (password !== confirmPassword) return showMessage("Passwords do not match.", "error");
+
+            const body = new FormData();
+            body.append("username", name);
+            body.append("email", email);
+            body.append("password", password);
+            body.append("phone", phone);
+            body.append("aadhaar", aadhaar);
+
+            showMessage("Creating your account...", "success");
+
+            try {
+                const response = await fetch(API_BASE + "/signup", { method: "POST", body });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.detail || "Registration failed");
+
+                if (data.access_token) {
+                    localStorage.setItem("veriByteAccessToken", data.access_token);
+                    localStorage.setItem("veriByteRefreshToken", data.refresh_token || "");
+
+                    // Sync any pending scan run before registering
+                    const pending = sessionStorage.getItem("veriBytePendingScan");
+                    if (pending) {
+                        try {
+                            await fetch(API_BASE + "/api/scans/save", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Authorization": "Bearer " + data.access_token
+                                },
+                                body: pending
+                            });
+                            sessionStorage.removeItem("veriBytePendingScan");
+                        } catch (e) {
+                            console.warn("Could not sync pending scan:", e);
+                        }
+                    }
+
+                    if (image) {
+                        const uploadBody = new FormData();
+                        uploadBody.append("file", image);
+                        const uploadResponse = await fetch(API_BASE + "/upload", {
+                            method: "POST",
+                            headers: { "Authorization": "Bearer " + data.access_token },
+                            body: uploadBody
+                        });
+                        const uploadData = await uploadResponse.json();
+                        if (!uploadResponse.ok) console.warn(uploadData.detail || "Document upload warning");
+                    }
+
+                    showMessage("Account created successfully! Opening your dashboard...", "success");
+                    setTimeout(() => window.location.href = "dashboard.html", 800);
+                } else {
+                    showMessage("Account created. Please confirm your email, then use the Login section on the home page.", "success");
+                }
+            } catch (error) {
+                showMessage(error.message, "error");
+            }
+        }
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        function showMessage(
+            text,
+            type
+        ) {
+
+            const message =
+                document
+                    .getElementById("message");
+
+
+            message.textContent = text;
+
+
+            message.className =
+                "message " + type;
+
+
+            message.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
+
+        }
+
+/* =========================
+   VERI-BYTE CHATBOT
+========================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const chatbotButton =
+        document.getElementById("chatbotButton");
+
+    const chatbotBox =
+        document.getElementById("chatbotBox");
+
+    const closeChatbot =
+        document.getElementById("closeChatbot");
+
+    const chatbotInput =
+        document.getElementById("chatbotInput");
+
+    const sendChatbotMessage =
+        document.getElementById("sendChatbotMessage");
+
+    const chatbotMessages =
+        document.getElementById("chatbotMessages");
+
+
+    /* OPEN CHATBOT */
+
+    chatbotButton.addEventListener(
+        "click",
+        function () {
+
+            chatbotBox.classList.add("active");
+
+            chatbotInput.focus();
+
+        }
+    );
+
+
+    /* CLOSE CHATBOT */
+
+    closeChatbot.addEventListener(
+        "click",
+        function () {
+
+            chatbotBox.classList.remove("active");
+
+        }
+    );
+
+
+    /* ADD MESSAGE */
+
+    function addMessage(
+        text,
+        type
+    ) {
+
+        const message =
+            document.createElement("div");
+
+        message.className =
+            type === "user"
+                ? "user-message"
+                : "bot-message";
+
+        message.textContent = text;
+
+        chatbotMessages.appendChild(message);
+
+        chatbotMessages.scrollTop =
+            chatbotMessages.scrollHeight;
+
+    }
+
+
+    /* BOT RESPONSE */
+
+    function getBotResponse(message) {
+
+        const text =
+            message.toLowerCase().trim();
+
+
+        if (
+            text.includes("hello") ||
+            text.includes("hi") ||
+            text.includes("hey")
+        ) {
+
+            return "Hello! 👋 How can I help you with Veri-Byte?";
+
+        }
+
+
+        if (
+            text.includes("register") ||
+            text.includes("account")
+        ) {
+
+            return "You can create your Veri-Byte account by filling in your name, phone number, email, Aadhaar details and password on this page.";
+
+        }
+
+
+        if (
+            text.includes("aadhaar") ||
+            text.includes("aadhar")
+        ) {
+
+            return "You can enter your 12-digit Aadhaar number in the Aadhaar field. You can also upload an Aadhaar image.";
+
+        }
+
+
+        if (
+            text.includes("password")
+        ) {
+
+            return "Your password should contain at least 8 characters. Make sure your confirmation password matches it.";
+
+        }
+
+
+        if (
+            text.includes("login")
+        ) {
+
+            return "Already have an account? Click the Login link at the bottom of this page to return to the Veri-Byte login page.";
+
+        }
+
+
+        if (
+            text.includes("verify") ||
+            text.includes("verification")
+        ) {
+
+            return "Veri-Byte is designed to help with identity verification using facial and document verification technologies.";
+
+        }
+
+
+        if (
+            text.includes("veri-byte") ||
+            text.includes("veribyte")
+        ) {
+
+            return "Veri-Byte is an identity verification project by Hexa-Byte.";
+
+        }
+
+
+        if (
+            text.includes("thank")
+        ) {
+
+            return "You're welcome! 😊";
+
+        }
+
+
+        if (
+            text.includes("bye")
+        ) {
+
+            return "Goodbye! 👋 Feel free to ask me anything about Veri-Byte.";
+
+        }
+
+
+        return "I'm still learning! 🤖 You can ask me about registration, Aadhaar, passwords, login, or Veri-Byte verification.";
+
+    }
+
+
+    /* SEND MESSAGE */
+
+    function sendMessage() {
+
+        const text =
+            chatbotInput.value.trim();
+
+
+        if (text === "") {
+
+            return;
+
+        }
+
+
+        /* USER MESSAGE */
+
+        addMessage(
+            text,
+            "user"
+        );
+
+
+        chatbotInput.value = "";
+
+
+        /* BOT MESSAGE */
+
+        setTimeout(
+            function () {
+
+                const response =
+                    getBotResponse(text);
+
+                addMessage(
+                    response,
+                    "bot"
+                );
+
+            },
+            500
+        );
+
+    }
+
+
+    /* SEND BUTTON */
+
+    sendChatbotMessage.addEventListener(
+        "click",
+        sendMessage
+    );
+
+
+    /* ENTER KEY */
+
+    chatbotInput.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+});
+    </script>
+
+	    </script>
+
+
+    <!-- =========================
+         CHATBOT
+    ========================= -->
+
+    <div class="chatbot-container">
+
+        <button
+            class="chatbot-button"
+            id="chatbotButton"
+            type="button"
+        >
+            💬
+        </button>
+
+
+        <div
+            class="chatbot-box"
+            id="chatbotBox"
+        >
+
+            <div class="chatbot-header">
+
+                <div>
+
+                    <strong>
+                        Veri-Byte Assistant
+                    </strong>
+
+                    <span>
+                        ● Online
+                    </span>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="closeChatbot"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                class="chatbot-messages"
+                id="chatbotMessages"
+            >
+
+                <div class="bot-message">
+                    Hello! 👋 I'm the Veri-Byte Assistant.
+                    How can I help you with your account or
+                    registration?
+                </div>
+
+            </div>
+
+
+            <div class="chatbot-input-area">
+
+                <input
+                    type="text"
+                    id="chatbotInput"
+                    placeholder="Type your message..."
+                    autocomplete="off"
+                >
+
+                <button
+                    type="button"
+                    id="sendChatbotMessage"
+                >
+                    ➤
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
+</body>
+
+</html>

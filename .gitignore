@@ -1,0 +1,43 @@
+# Virtual environment
+.venv/
+venv/
+
+# Temporary uploads (security: must be cleaned)
+temp_uploads/
+backend/temp_uploads/
+
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+backend/dist/
+frontend/dist/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Sample data (may contain PII)
+sample_data/
+
+# Dependencies & Node
+node_modules/
+frontend/node_modules/
+
+# Environment
+.env
+*.env
+backend/.env
+
+# Runtime user scans & credentials (PII & sensitive data)
+backend/data/local_users.json
+backend/data/user_scans.json
+
