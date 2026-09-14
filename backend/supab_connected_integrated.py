@@ -21,8 +21,8 @@ if _env_file.exists():
     load_dotenv(_env_file)
 load_dotenv()
 
-SUPABASE_URL = os.getenv("SUPABASE_URL", "https://esmolwbhxacaeoqdrmji.supabase.co")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", "sb_publishable_ZbIX998qqPYNrLadOOxq0g_3dXwlf8l")
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 if not SUPABASE_URL or not SUPABASE_KEY:
     raise RuntimeError("SUPABASE_URL or SUPABASE_KEY is missing")
